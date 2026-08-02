@@ -1,0 +1,77 @@
+generated: '2026-08-02'
+method: derived
+source: >-
+  openapi/positron-inference-openapi.yml, openapi/positron-admin-openapi.yml,
+  security/positron-domain-security.yml, well-known/positron-well-known.yml,
+  https://support.positron.ai/, https://www.positron.ai/
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: >-
+    Both published documents declare `openapi: 3.1.0` and parse cleanly — the Olivaw OpenAI API
+    (4 operations, 20 component schemas) and the Olivaw Admin API (19 operations, 10 schemas).
+- id: openai-api-compatibility
+  conforms: true
+  evidence: >-
+    /models, /models/{model}, /chat/completions and /completions with OpenAI-shaped request and
+    response envelopes (object discriminators chat.completion / text_completion / list / model,
+    choices[], usage), extended with top_k, seed and ignore_eos. Stated on positron.ai and in the
+    developer portal as the integration path.
+- id: server-sent-events
+  conforms: true
+  evidence: >-
+    Both completion operations declare a text/event-stream response with
+    ChatCompletionChunkText / Completion chunk items, driven by SelectionSettings.stream.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use an OpenAI-style application/json object ({object, type, message}); no
+    application/problem+json media type appears in either document.
+- id: oauth2
+  conforms: false
+  evidence: no oauth2 securityScheme in either document; no /.well-known/oauth-authorization-server (404).
+- id: oidc
+  conforms: false
+  evidence: >-
+    No /.well-known/openid-configuration on any Positron host (404). The Olivaw GUI itself
+    authenticates operators via "Google account via Auth0" per the user guide, but no OIDC
+    discovery document is published for the API.
+- id: api-key-auth
+  conforms: true
+  evidence: >-
+    Inference API declares an `apiKey` scheme in the `authorization` header applied globally;
+    the admin API declares a root-level `bearer` requirement.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every Positron host.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no deprecation/sunset policy or header support documented.
+- id: json-schema-2020-12
+  conforms: true
+  evidence: >-
+    OpenAPI 3.1 schemas use JSON Schema 2020-12 keywords (const, type arrays with null, enum,
+    allOf composition of ChatCompletionRequest + SelectionSettings).
+- id: tls-1.3
+  conforms: true
+  evidence: >-
+    TLSv1.3 negotiated on www.positron.ai, support.positron.ai and api.positron.ai
+    (probed 2026-08-02).
+- id: hsts
+  conforms: partial
+  evidence: >-
+    HSTS with max-age 63072000 on www.positron.ai and support.positron.ai; absent on the API
+    host api.positron.ai.
+- id: dnssec
+  conforms: false
+  evidence: positron.ai is not DNSSEC-signed.
+- id: dmarc
+  conforms: partial
+  evidence: DMARC record present on positron.ai with policy p=none (monitor only); SPF present; no CAA records.
+compliance_program:
+  published: false
+  certifications: []
+  note: >-
+    No trust center, no SOC 2 / ISO 27001 / HIPAA / FedRAMP claim and no compliance page were
+    found on positron.ai or support.positron.ai (probed 2026-08-02). No `Compliance` pointer is
+    emitted, since none is published.

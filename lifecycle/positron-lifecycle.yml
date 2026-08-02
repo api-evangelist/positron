@@ -1,0 +1,47 @@
+generated: '2026-08-02'
+method: searched
+source: >-
+  https://support.positron.ai/release-notes, https://support.positron.ai/api-documentation,
+  https://www.positron.ai/atlas, openapi/positron-inference-openapi.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  api_version: '1.0'
+  docs: https://support.positron.ai/api-documentation
+  evidence: >-
+    inference OpenAPI server template `{host}/api/v1`; info.version '1.0' on both the Olivaw
+    OpenAI API and the Olivaw Admin API documents.
+  product_versioning:
+    scheme: appliance release train
+    current: Atlas v1.1
+    docs: https://support.positron.ai/release-notes
+    note: >-
+      The published release notes version the Atlas appliance / Olivaw software image, not the
+      HTTP API. Atlas v1.1 added two quantized Llama 3.1 models (NeuralMagic GPTQ weights).
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation or sunset policy is published, and no RFC 8594 Sunset/Deprecation header
+    support is documented. No operation in either OpenAPI is marked `deprecated: true`.
+sla:
+  url: https://www.positron.ai/atlas
+  uptime_target: null
+  support_response: 24-hour SLA support from a US-based team (published on the Atlas product page)
+  note: >-
+    The SLA published is a hardware/support SLA for the Atlas appliance, not an API uptime
+    commitment. No API availability target is published.
+status_page: null
+status_page_note: >-
+  No status page. status.positron.ai does not resolve to a distinct host (wildcard DNS returns
+  the apex) and does not answer HTTPS; no third-party status page (Statuspage/Instatus/BetterStack)
+  was found for Positron AI. Consistent with an appliance/private-cluster deployment model where
+  availability is the customer's own hardware.
+changelog: https://support.positron.ai/release-notes
+deprecated_operations: []
+support:
+  contact: https://www.positron.ai/contact-sales
+  developer_portal: https://support.positron.ai/
+  api_contact_email: api@positron.ai

@@ -1,0 +1,39 @@
+generated: '2026-08-02'
+method: generated
+source: >-
+  openapi/positron-inference-openapi.yml, openapi/positron-admin-openapi.yml,
+  https://support.positron.ai/user-guide — every step is grounded in an operationId verified
+  present in the referenced specification. No provider-published skills or AGENTS.md were found
+  on positron.ai, support.positron.ai or github.com/positron-ai (searched 2026-08-02).
+skills:
+- file: positron-run-chat-completion.md
+  name: Run a chat completion on Positron
+  api: openapi/positron-inference-openapi.yml
+  operations: [listModels, getModel, createChatCompletion]
+- file: positron-manage-models-and-nodes.md
+  name: Manage Positron models and service nodes
+  api: openapi/positron-admin-openapi.yml
+  operations:
+  - listServiceNodes
+  - getServiceNode
+  - createServiceNode
+  - updateServiceNode
+  - deleteServiceNode
+  - listModels
+  - getModel
+  - createModel
+  - updateModel
+  - deleteModel
+- file: positron-issue-and-revoke-access-tokens.md
+  name: Issue and revoke Positron access tokens
+  api: openapi/positron-admin-openapi.yml
+  operations:
+  - listUsers
+  - getUser
+  - createUser
+  - updateUser
+  - deleteUser
+  - listAccessTokens
+  - getAccessToken
+  - createAccessToken
+  - deleteAccessToken

@@ -1,0 +1,65 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Positron Olivaw OpenAI-Compatible Inference API
+  version: 1.0.0
+extends: openapi/positron-inference-openapi.yml
+x-generated: '2026-08-02'
+x-method: generated
+x-source: >-
+  Harvested from the spec embedded in https://support.positron.ai/api-documentation on
+  2026-08-02; enhancements derived from the Positron developer portal, product pages and this
+  repo's artifacts. The original document is never mutated.
+actions:
+- target: $.info
+  update:
+    x-provider: Positron AI
+    x-provider-url: https://www.positron.ai/
+    x-apievangelist-harvested: '2026-08-02'
+    x-apievangelist-source: https://support.positron.ai/api-documentation
+    x-documentation: https://support.positron.ai/api-documentation
+    x-getting-started: https://support.positron.ai/user-guide
+    x-release-notes: https://support.positron.ai/release-notes
+- target: $.info
+  update:
+    x-openai-compatible: true
+    x-openai-compatible-note: >-
+      Implements the OpenAI models/completions surface so an OpenAI client library works by
+      changing base_url and api key. Extends OpenAI selection settings with top_k, seed and
+      ignore_eos. functions/function_call are declared but the document states the feature is
+      not currently supported.
+- target: $.servers
+  update:
+    x-deployment-note: >-
+      The declared server template {host}/api/v1 defaults to http://localhost:4000, which is an
+      on-premises Atlas appliance, not a production endpoint. Hosted Olivaw endpoints are
+      documented in the user guide in the form https://<groupname>-olivaw.fly.dev.
+      api.positron.ai is live and returns 401 on every path (probed 2026-08-02).
+- target: $.components.securitySchemes.apiKey
+  update:
+    description: >-
+      API key presented in the `authorization` request header. Tokens are minted and revoked
+      through the Olivaw Admin API (createAccessToken / deleteAccessToken).
+    x-artifact: authentication/positron-authentication.yml
+- target: $.paths['/chat/completions'].post
+  update:
+    x-streaming:
+      supported: true
+      media_type: text/event-stream
+      request_flag: stream
+    x-idempotent: false
+    x-error-catalog: errors/positron-problem-types.yml
+- target: $.paths['/completions'].post
+  update:
+    x-streaming:
+      supported: true
+      media_type: text/event-stream
+      request_flag: stream
+    x-idempotent: false
+    x-error-catalog: errors/positron-problem-types.yml
+- target: $.paths['/models'].get
+  update:
+    x-idempotent: true
+    x-pagination: none
+- target: $.paths['/models/{model}'].get
+  update:
+    x-idempotent: true

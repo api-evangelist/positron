@@ -1,0 +1,46 @@
+generated: '2026-08-02'
+method: searched
+source: >-
+  npm, PyPI, RubyGems/crates/Packagist name probes; github.com/positron-ai (14 public repos);
+  support.positron.ai developer portal
+packages: []
+note: >-
+  Positron AI publishes no first-party client SDK. Its integration story is deliberately
+  library-free: the Olivaw inference endpoint is OpenAI API-compatible, so the documented path is
+  to point an existing OpenAI client at a Positron endpoint rather than install a Positron
+  package. The public positron-ai GitHub org holds 14 repositories, of which 12 are forks of
+  upstream ML projects (transformers, llama.cpp, gpt-oss, DeepSeek-V3, guidellm, aiperf,
+  openplayground, autoagent, Defuser, cube, positron-gradio) and 2 are first-party
+  (hf-litmus — continuous HuggingFace model-compatibility testing; nix-installer — a .deb build
+  of the Determinate Systems Nix installer). None is a client library for the Positron APIs.
+compatible_clients:
+- name: OpenAI client libraries (any language)
+  official: false
+  relationship: compatibility
+  note: >-
+    The Olivaw OpenAI API implements the OpenAI models/chat-completions/completions surface, so
+    OpenAI's own SDKs work when their base_url is repointed at a Positron endpoint. Not a
+    Positron-authored or Positron-maintained package.
+  source: https://support.positron.ai/api-documentation
+searched_registries:
+- registry: npm
+  queried: [positron, positron-ai, "@positron-ai/sdk", olivaw]
+  result: no first-party package (name collisions with unrelated projects)
+- registry: pypi
+  queried: [positron, positron-ai, positronai, olivaw]
+  result: no first-party package (name collisions with unrelated projects)
+- registry: github
+  queried: [positron-ai org]
+  result: no client library repository
+first_party_repos:
+- name: hf-litmus
+  url: https://github.com/positron-ai/hf-litmus
+  language: Python
+  description: Continuous model compatibility testing for Tron
+- name: admin-api-docs
+  url: https://github.com/positron-ai/admin-api-docs
+  description: Sphinx docs repository carrying the Olivaw Admin API OpenAPI 3.1.0 document
+- name: nix-installer
+  url: https://github.com/positron-ai/nix-installer
+  language: Shell
+  description: Build a .deb from the current Determinate Systems Nix installer

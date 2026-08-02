@@ -1,0 +1,30 @@
+generated: '2026-08-02'
+method: searched
+source: https://support.positron.ai/release-notes
+scheme: appliance release train (Atlas vMAJOR.MINOR)
+current_version: Atlas v1.1
+dated: false
+note: >-
+  Positron publishes release notes for the Atlas appliance / Olivaw software image on its
+  developer portal. The page carries no publication dates and no per-entry history beyond the
+  current release, so only the current entry can be captured faithfully; the live page remains
+  the source of truth. The HTTP APIs themselves are versioned separately ('1.0' / /api/v1) and
+  have no independent changelog.
+entries:
+- version: Atlas v1.1
+  date: null
+  breaking: false
+  additions:
+  - >-
+    Two additional language models are now included, using a quantized set of weights from
+    NeuralMagic.
+  supported_models:
+  - Llama-3.1-8B-instruct-gptq (neuralmagic)
+  - Llama-3.1-70B-instruct-gptq (neuralmagic)
+  - Mixtral 8x7B-instruct-gptq
+  highlights:
+  - Shipping model primarily tested to a context length of 2048 (prompt + response).
+  known_issues:
+  - >-
+    Only Llama 3.1 8B is running on first boot; additional models must be configured manually
+    through the Olivaw admin utility to activate them on the Atlas appliance.

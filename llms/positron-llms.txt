@@ -1,0 +1,66 @@
+# Positron AI
+
+> Positron AI builds purpose-built Transformer inference hardware — the Atlas appliance (8x in-house
+> Archer accelerators, 256 GB HBM), with Asimov silicon and the Titan system slated for 2027. Its
+> Olivaw serving layer publishes two documented HTTP APIs: an OpenAI API-compatible inference
+> endpoint (models, chat completions, text completions, SSE streaming) and an administrative API for
+> models, service nodes, users and access tokens. Founded 2023, Reno NV; $230M Series B (Feb 2026)
+> at a >$1B valuation.
+
+Generated: 2026-08-02
+Method: generated (no provider-published /llms.txt — support.positron.ai/llms.txt and
+www.positron.ai/llms.txt both return 404, probed 2026-08-02)
+Source: apis.yml and the artifacts in this repository
+
+## APIs
+
+- [Positron Olivaw OpenAI-Compatible Inference API](https://support.positron.ai/api-documentation): List models, retrieve a model, create chat completions and text completions against models loaded on Positron hardware. API key in the `authorization` header. 4 operations.
+- [Positron Olivaw Admin API](https://github.com/positron-ai/admin-api-docs): Control plane for the model catalogue, service nodes (Giskard / vLLM / OpenAI backends), platform users and access tokens. Bearer API key. 19 operations.
+
+## Specs
+
+- [Olivaw OpenAI API — OpenAPI 3.1.0](openapi/positron-inference-openapi.yml): harvested from the published spec at support.positron.ai/api-documentation
+- [Olivaw Admin API — OpenAPI 3.1.0](openapi/positron-admin-openapi.yml): harvested verbatim from positron-ai/admin-api-docs
+- [Inference overlay](overlays/positron-inference-overlay.yaml)
+- [Admin overlay](overlays/positron-admin-overlay.yaml)
+
+## Docs
+
+- [Developer portal](https://support.positron.ai/)
+- [API documentation](https://support.positron.ai/api-documentation)
+- [User guide / getting started](https://support.positron.ai/user-guide)
+- [Release notes](https://support.positron.ai/release-notes)
+- [Atlas product page](https://www.positron.ai/atlas)
+- [Titan](https://www.positron.ai/titan) / [Vision](https://www.positron.ai/vision) / [Asimov](https://www.positron.ai/asimov)
+- [About](https://www.positron.ai/about) / [Press](https://www.positron.ai/press) / [Careers](https://www.positron.ai/careers)
+- [GitHub organization](https://github.com/positron-ai)
+- [Contact sales](https://www.positron.ai/contact-sales)
+
+## Artifacts
+
+- [Authentication profile](authentication/positron-authentication.yml)
+- [API conventions](conventions/positron-conventions.yml)
+- [Error catalog](errors/positron-problem-types.yml)
+- [Data model](data-model/positron-data-model.yml)
+- [Lifecycle](lifecycle/positron-lifecycle.yml)
+- [Changelog](changelog/positron-changelog.yml)
+- [Conformance](conformance/positron-conformance.yml)
+- [Packages](packages/positron-packages.yml)
+- [Well-known probe results](well-known/positron-well-known.yml)
+- [Domain security](security/positron-domain-security.yml)
+- [Agentic access contracts](agentic-access/positron-agentic-access.yml)
+- [Agent skills](skills/_index.yml)
+- [MCP candidate tool list](mcp/positron-mcp.yml)
+
+## Integration notes
+
+- The inference API mirrors OpenAI's, so an OpenAI client library works by repointing `base_url`
+  at a Positron endpoint and supplying a Positron key. Positron adds `top_k`, `seed` and
+  `ignore_eos` to the selection settings.
+- `functions` / `function_call` appear in the chat schema but the published document states the
+  feature is not currently supported.
+- Streaming is server-sent events (`text/event-stream`) via `stream: true`.
+- Errors are OpenAI-style `{object: "error", type, message}` — not RFC 9457 problem+json.
+- No idempotency keys, no pagination, no rate-limit headers and no published quotas.
+- Positron ships no first-party SDK, no CLI, no MCP server, no webhooks/AsyncAPI, no status page,
+  no public pricing and no /.well-known/ documents (all probed 2026-08-02).

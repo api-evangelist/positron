@@ -1,0 +1,66 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Positron Olivaw Admin API
+  version: 1.0.0
+extends: openapi/positron-admin-openapi.yml
+x-generated: '2026-08-02'
+x-method: generated
+x-source: >-
+  Harvested verbatim from docs/source/admin_api.rst in https://github.com/positron-ai/admin-api-docs
+  on 2026-08-02; enhancements derived from this repo's artifacts. The original document is never
+  mutated.
+actions:
+- target: $.info
+  update:
+    x-provider: Positron AI
+    x-provider-url: https://www.positron.ai/
+    x-apievangelist-harvested: '2026-08-02'
+    x-apievangelist-source: https://github.com/positron-ai/admin-api-docs
+    x-documentation: https://github.com/positron-ai/admin-api-docs
+    x-companion-api: openapi/positron-inference-openapi.yml
+- target: $.info
+  update:
+    x-spec-gaps:
+    - >-
+      The document declares a root-level `security` requirement referencing a `bearer` scheme but
+      defines no components.securitySchemes, so the scheme object is undefined.
+    - No servers[] block; the admin surface is served per appliance/cluster deployment.
+    - No 401/403 responses documented despite the root-level security requirement.
+    - >-
+      404 descriptions on updateServiceNode and deleteAccessToken read "The model was not found."
+      and "The user was not found." — apparent copy/paste in the source document.
+- target: $.info
+  update:
+    x-control-plane: true
+    x-control-plane-note: >-
+      This is the control plane for the same Model catalogue the inference API reads, plus the
+      ServiceNode fleet (Giskard / vLLM / OpenAI backends), platform Users, and the AccessTokens
+      used to call the inference API.
+- target: $.paths['/accessTokens/new'].post
+  update:
+    x-consequence: >-
+      Mints a credential that can call the inference API. Treat as a privileged, audited
+      operation; there is no update operation, so rotation is create-then-delete.
+    x-idempotent: false
+- target: $.paths['/models/new'].post
+  update:
+    x-idempotent: false
+    x-error-catalog: errors/positron-problem-types.yml
+- target: $.paths['/serviceNodes/new'].post
+  update:
+    x-idempotent: false
+    x-operational-note: >-
+      Deleting a service node causes Olivaw to forget the node; "Sync Models" in the Olivaw GUI
+      queries a node for the models it can serve.
+- target: $.paths['/models'].get
+  update:
+    x-pagination: none
+- target: $.paths['/serviceNodes'].get
+  update:
+    x-pagination: none
+- target: $.paths['/users'].get
+  update:
+    x-pagination: none
+- target: $.paths['/accessTokens'].get
+  update:
+    x-pagination: none

@@ -1,23 +1,179 @@
 aid: positron
 name: Positron
-description: 'Positron is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Positron AI is a US-based generative-AI hardware company founded in 2023 and headquartered in Reno, Nevada,
+  building purpose-built Transformer inference accelerators as an alternative to GPU-based inference infrastructure.
+  Its shipping product, Atlas, is a rack inference appliance built on eight in-house Archer accelerators (256 GB HBM)
+  and dual AMD EPYC Genoa processors, with the next-generation Asimov silicon and Titan system slated for 2027.
+  Positron exposes its inference fleet through "Olivaw", a serving and administration layer that publishes two
+  documented HTTP APIs: an OpenAI-compatible completions API (models, chat completions, text completions, with
+  server-sent-event streaming) so existing OpenAI client code can be repointed at a Positron endpoint, and an
+  administrative API for managing models, service nodes, users, and access tokens on an appliance or hosted cluster.
+  The company raised a $230M Series B in February 2026 at a valuation above $1B from ARENA, Jump Trading, Unless,
+  the Qatar Investment Authority, Arm, Helena, DFJ Growth, Atreides, Valor, Resilience Reserve, Flume Ventures and
+  1517 Fund.
+image: https://www.positron.ai/opengraph-image-pwu6ef.png
 url: https://raw.githubusercontent.com/api-evangelist/positron/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-02'
 modified: '2026-08-02'
 tags:
-- Company
-apis: []
+- artificial-intelligence
+- ai-inference
+- inference-hardware
+- ai-accelerators
+- large-language-models
+- transformers
+- openai-compatible
+- machine-learning
+- semiconductors
+- data-center
+- llm-serving
+- model-hosting
+apis:
+- name: Positron Olivaw OpenAI-Compatible Inference API
+  description: >-
+    OpenAI API-compatible inference endpoint served by Positron's Olivaw serving layer. Lists available models,
+    retrieves a single model, and creates chat completions and raw text completions against models loaded onto
+    Positron Atlas hardware, with optional text/event-stream streaming responses and Positron-specific selection
+    settings (max_tokens, temperature, top_p, top_k). Authenticated with an API key in the authorization header.
+    Because the API mirrors the OpenAI surface, existing OpenAI client libraries can be repointed at a Positron
+    endpoint without code changes.
+  humanURL: https://support.positron.ai/api-documentation
+  baseURL: https://api.positron.ai/
+  x-baseurl-evidence: >-
+    api.positron.ai is live (Caddy, HTTP/2) and returns 401 Unauthorized on every probed path, including
+    /openapi.json, /v1/models and /.well-known/*, so the surface is entirely auth-gated and could not be
+    enumerated anonymously (probed 2026-08-02). The published OpenAPI declares a deployment-scoped server
+    template `{host}/api/v1` whose default host is `http://localhost:4000` (an on-premises Atlas appliance);
+    the user guide documents hosted endpoints in the form `https://<groupname>-olivaw.fly.dev`.
+  tags:
+  - ai-inference
+  - large-language-models
+  - openai-compatible
+  - llm-serving
+  - chat-completions
+  properties:
+  - type: OpenAPI
+    url: openapi/positron-inference-openapi.yml
+  - type: Documentation
+    url: https://support.positron.ai/api-documentation
+  - type: APIReference
+    url: https://support.positron.ai/api-documentation
+  - type: Authentication
+    url: authentication/positron-authentication.yml
+  - type: Conventions
+    url: conventions/positron-conventions.yml
+  - type: ErrorCatalog
+    url: errors/positron-problem-types.yml
+  - type: DataModel
+    url: data-model/positron-data-model.yml
+  - type: Overlay
+    url: overlays/positron-inference-overlay.yaml
+- name: Positron Olivaw Admin API
+  description: >-
+    Administrative API for the Olivaw layer that fronts Positron Atlas hardware. Manages the model catalog
+    (list/create/read/update/delete), the service nodes that back it (Giskard, vLLM or OpenAI backends, with
+    per-node JSON configuration and model lists), platform users, and API access tokens. Published by Positron AI
+    as an OpenAPI 3.1.0 document in the public positron-ai/admin-api-docs repository; secured with a bearer
+    API key.
+  humanURL: https://github.com/positron-ai/admin-api-docs
+  baseURL: https://api.positron.ai/
+  x-baseurl-evidence: >-
+    The published admin OpenAPI declares no servers[] block; the admin surface is served per deployment by the
+    Olivaw appliance/cluster. api.positron.ai is Positron's live, auth-gated (401) API host as probed 2026-08-02.
+  tags:
+  - ai-inference
+  - model-hosting
+  - administration
+  - access-tokens
+  - llm-serving
+  properties:
+  - type: OpenAPI
+    url: openapi/positron-admin-openapi.yml
+  - type: Documentation
+    url: https://github.com/positron-ai/admin-api-docs
+  - type: SourceCode
+    url: https://github.com/positron-ai/admin-api-docs
+  - type: Authentication
+    url: authentication/positron-authentication.yml
+  - type: ErrorCatalog
+    url: errors/positron-problem-types.yml
+  - type: DataModel
+    url: data-model/positron-data-model.yml
+  - type: Overlay
+    url: overlays/positron-admin-overlay.yaml
+common:
+- type: DomainSecurity
+  url: security/positron-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/positron-agentic-access.yml
+- type: Website
+  url: https://www.positron.ai/
+- type: DeveloperPortal
+  url: https://support.positron.ai/
+- type: Documentation
+  url: https://support.positron.ai/api-documentation
+- type: APIReference
+  url: https://support.positron.ai/api-documentation
+- type: GettingStarted
+  url: https://support.positron.ai/user-guide
+- type: Support
+  url: https://www.positron.ai/contact-sales
+- type: GitHubOrganization
+  url: https://github.com/positron-ai
+- type: ChangeLog
+  url: https://support.positron.ai/release-notes
+- type: ChangeLog
+  url: changelog/positron-changelog.yml
+- type: Press
+  url: https://www.positron.ai/press
+- type: Careers
+  url: https://www.positron.ai/careers
+- type: LinkedIn
+  url: https://www.linkedin.com/company/positron-ai/
+- type: Twitter
+  url: https://twitter.com/positron_ai
+- type: OpenAPI
+  url: openapi/positron-inference-openapi.yml
+- type: OpenAPI
+  url: openapi/positron-admin-openapi.yml
+- type: Authentication
+  url: authentication/positron-authentication.yml
+- type: Conventions
+  url: conventions/positron-conventions.yml
+- type: ErrorCatalog
+  url: errors/positron-problem-types.yml
+- type: DataModel
+  url: data-model/positron-data-model.yml
+- type: Lifecycle
+  url: lifecycle/positron-lifecycle.yml
+- type: Conformance
+  url: conformance/positron-conformance.yml
+- type: Packages
+  url: packages/positron-packages.yml
+- type: WellKnown
+  url: well-known/positron-well-known.yml
+- type: LLMsTxt
+  url: llms/positron-llms.txt
+- type: Overlay
+  url: overlays/positron-inference-overlay.yaml
+- type: Overlay
+  url: overlays/positron-admin-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
-common:
-- type: Website
-  url: https://forgeglobal.com/positron_stock/
+- FN: Positron AI
+  email: api@positron.ai
+  url: https://www.positron.ai/
+x-enrichment:
+  date: '2026-08-02'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1

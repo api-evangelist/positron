@@ -1,0 +1,76 @@
+generated: '2026-08-02'
+method: derived
+status: candidate
+source: openapi/positron-inference-openapi.yml, openapi/positron-admin-openapi.yml
+published_server: null
+search_evidence:
+  searched:
+  - https://www.positron.ai/ and product pages
+  - https://support.positron.ai/ (portal, user guide, release notes, API documentation)
+  - https://github.com/positron-ai (14 public repositories)
+  - npm/@modelcontextprotocol namespace and MCP registry/web search for "Positron AI MCP"
+  - https://mcp.positron.ai (wildcard DNS, no HTTPS listener)
+  result: >-
+    Positron AI publishes no hosted or packaged MCP server as of 2026-08-02. The tools below are a
+    DERIVED candidate design, one per real OpenAPI operationId, not a provider claim. No
+    `MCPServer` pointer is wired in apis.yml because no MCP server exists.
+tools:
+- name: list_models
+  description: List the models currently available for inference.
+  source_operation: openapi/positron-inference-openapi.yml#listModels
+- name: get_model
+  description: Retrieve a single model by id, including creation time and owner.
+  source_operation: openapi/positron-inference-openapi.yml#getModel
+- name: create_chat_completion
+  description: Create a model response for a chat conversation (messages[], optional streaming).
+  source_operation: openapi/positron-inference-openapi.yml#createChatCompletion
+- name: create_completion
+  description: Create a model response for a raw text prompt (optional streaming).
+  source_operation: openapi/positron-inference-openapi.yml#createCompletion
+admin_tools:
+- name: admin_list_models
+  source_operation: openapi/positron-admin-openapi.yml#listModels
+- name: admin_get_model
+  source_operation: openapi/positron-admin-openapi.yml#getModel
+- name: admin_create_model
+  source_operation: openapi/positron-admin-openapi.yml#createModel
+- name: admin_update_model
+  source_operation: openapi/positron-admin-openapi.yml#updateModel
+- name: admin_delete_model
+  source_operation: openapi/positron-admin-openapi.yml#deleteModel
+- name: admin_list_service_nodes
+  source_operation: openapi/positron-admin-openapi.yml#listServiceNodes
+- name: admin_get_service_node
+  source_operation: openapi/positron-admin-openapi.yml#getServiceNode
+- name: admin_create_service_node
+  source_operation: openapi/positron-admin-openapi.yml#createServiceNode
+- name: admin_update_service_node
+  source_operation: openapi/positron-admin-openapi.yml#updateServiceNode
+- name: admin_delete_service_node
+  source_operation: openapi/positron-admin-openapi.yml#deleteServiceNode
+- name: admin_list_users
+  source_operation: openapi/positron-admin-openapi.yml#listUsers
+- name: admin_get_user
+  source_operation: openapi/positron-admin-openapi.yml#getUser
+- name: admin_create_user
+  source_operation: openapi/positron-admin-openapi.yml#createUser
+- name: admin_update_user
+  source_operation: openapi/positron-admin-openapi.yml#updateUser
+- name: admin_delete_user
+  source_operation: openapi/positron-admin-openapi.yml#deleteUser
+- name: admin_list_access_tokens
+  source_operation: openapi/positron-admin-openapi.yml#listAccessTokens
+- name: admin_get_access_token
+  source_operation: openapi/positron-admin-openapi.yml#getAccessToken
+- name: admin_create_access_token
+  source_operation: openapi/positron-admin-openapi.yml#createAccessToken
+- name: admin_delete_access_token
+  source_operation: openapi/positron-admin-openapi.yml#deleteAccessToken
+notes:
+- >-
+  Every candidate tool inherits its real input contract from the referenced operation's
+  parameters/requestBody in the OpenAPI; nothing here is invented.
+- >-
+  The admin tools mutate a control plane (including minting inference credentials); see
+  agentic-access/positron-agentic-access.yml for the recommended execution contracts before
+  exposing any of them to an agent.

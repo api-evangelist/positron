@@ -1,0 +1,100 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/positron-inference-openapi.yml, openapi/positron-admin-openapi.yml
+docs: https://support.positron.ai/api-documentation
+summary: >-
+  Positron's Olivaw APIs follow the OpenAI HTTP conventions rather than a Positron-specific
+  house style: JSON request and response bodies, an `object` discriminator on every response
+  envelope, an `id`/`created`/`model`/`choices`/`usage` completion envelope, and server-sent
+  events for streaming. The surface is small (4 inference operations, 19 admin operations) and
+  documents no idempotency keys, no pagination, no request-id tracing header and no rate-limit
+  headers.
+authentication:
+  style: api-key
+  inference_api:
+    scheme: apiKey
+    location: header
+    parameter: authorization
+    applied: globally via a root-level security requirement
+  admin_api:
+    scheme: >-
+      bearer (declared in a root-level `security` requirement as `bearer: [API key]`)
+    note: >-
+      The published admin document references a `bearer` security scheme but declares no
+      `components.securitySchemes`, so the scheme object itself is undefined in the spec.
+  see: authentication/positron-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key header, parameter or retry contract is documented on either API. Model,
+    service-node, user and access-token creation on the admin API use POST /<collection>/new
+    with no client-supplied key, so retries are not deduplicated. Completions are inherently
+    non-idempotent; `seed` in SelectionSettings makes token selection reproducible but is a
+    determinism control, not a request-deduplication key.
+pagination:
+  supported: false
+  note: >-
+    All collection endpoints (/models, /serviceNodes, /users, /accessTokens) return a full
+    `{object: list, data: []}` envelope with no limit/offset/cursor parameters and no
+    has_more/next fields.
+filtering_and_expansion:
+  supported: false
+metadata:
+  supported: false
+  note: >-
+    The inference API accepts an optional free-form `user` identifier on completion requests
+    ("The user identifier, which can be referenced in the API endpoints") but no key/value
+    metadata object.
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation header is documented. Responses carry an `id` on the
+    completion object (e.g. the ChatCompletion `id`) which is the only per-request handle.
+versioning:
+  scheme: uri-path
+  current: v1
+  evidence: >-
+    server template `{host}/api/v1` in the inference OpenAPI; `info.version: '1.0'` on both
+    documents. No version header, no dated versions, no version negotiation documented.
+  see: lifecycle/positron-lifecycle.yml
+error_envelope:
+  format: openai-style JSON object (not RFC 9457 problem+json)
+  media_type: application/json
+  shape:
+    object: error
+    type: enum [client, "internal error"]
+    message: string
+  required: [object, type, message]
+  see: errors/positron-problem-types.yml
+rate_limiting:
+  documented_limits: false
+  signaling_headers: none documented
+  error_status: 429
+  note: >-
+    Both completion operations declare a 429 "The request was rate limited." response and a 503
+    "The service is unavailable, likely due to overcapacity." response, but no quota values,
+    no RateLimit/Retry-After headers and no plan tiers are published — consistent with an
+    appliance/private-cluster deployment model where capacity is the customer's own hardware.
+streaming:
+  supported: true
+  transport: server-sent events
+  media_type: text/event-stream
+  request_flag: stream (SelectionSettings.stream)
+  chunk_object: ChatCompletionChunk / Completion
+  note: >-
+    Both /chat/completions and /completions declare a text/event-stream response alongside the
+    application/json response; chat streaming emits ChatCompletionChunkText items carrying
+    ChatCompletionDelta payloads.
+compatibility:
+  target: OpenAI API
+  note: >-
+    Request and response shapes intentionally mirror OpenAI's, so an OpenAI client library works
+    against a Positron endpoint by changing the base URL and key. Positron extends the OpenAI
+    selection settings with `top_k`, `ignore_eos` and `seed`. Chat `functions`/`function_call`
+    are present in the schema but the document states "NB: this feature is not currently
+    supported".
+cross_links:
+  errors: errors/positron-problem-types.yml
+  lifecycle: lifecycle/positron-lifecycle.yml
+  authentication: authentication/positron-authentication.yml
+  data_model: data-model/positron-data-model.yml

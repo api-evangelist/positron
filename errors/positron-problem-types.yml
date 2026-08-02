@@ -1,0 +1,92 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/positron-inference-openapi.yml, openapi/positron-admin-openapi.yml
+format: openai-error-object
+format_note: >-
+  Positron does NOT use RFC 9457 application/problem+json. Every documented 4xx/5xx response on
+  both APIs returns application/json carrying the `Error` schema:
+  `{"object": "error", "type": "client" | "internal error", "message": "<string>"}` — all three
+  fields required. There is no machine-readable error `code`, no `type` URI, and no field-level
+  validation detail, so clients discriminate on HTTP status plus the free-text `message`.
+envelope:
+  media_type: application/json
+  schema: '#/components/schemas/Error'
+  fields:
+  - name: object
+    const: error
+  - name: type
+    enum: [client, internal error]
+  - name: message
+    type: string
+    description: The error message.
+problems:
+- status: 400
+  title: Invalid information provided
+  error_type: client
+  api: admin
+  description: >-
+    The request body failed validation on a create or update operation. Documented as "invalid
+    information provided to server" on create and "invalid information provided to update" on
+    patch. No field-level error detail is specified.
+  remediation: Re-check the Model / ServiceNode / User / AccessToken payload against components.schemas.
+  source_operations:
+  - openapi/positron-admin-openapi.yml#createModel
+  - openapi/positron-admin-openapi.yml#updateModel
+  - openapi/positron-admin-openapi.yml#createServiceNode
+  - openapi/positron-admin-openapi.yml#updateServiceNode
+  - openapi/positron-admin-openapi.yml#createUser
+  - openapi/positron-admin-openapi.yml#updateUser
+  - openapi/positron-admin-openapi.yml#createAccessToken
+- status: 404
+  title: Resource not found
+  error_type: client
+  api: both
+  description: >-
+    The addressed model, service node, user or access token does not exist. Both documents
+    declare it with the same `Error` body.
+  remediation: >-
+    List the collection first (listModels / listServiceNodes / listUsers / listAccessTokens) and
+    use an id returned there.
+  source_operations:
+  - openapi/positron-inference-openapi.yml#getModel
+  - openapi/positron-admin-openapi.yml#getModel
+  - openapi/positron-admin-openapi.yml#updateModel
+  - openapi/positron-admin-openapi.yml#deleteModel
+  - openapi/positron-admin-openapi.yml#getServiceNode
+  - openapi/positron-admin-openapi.yml#updateServiceNode
+  - openapi/positron-admin-openapi.yml#deleteServiceNode
+  - openapi/positron-admin-openapi.yml#getUser
+  - openapi/positron-admin-openapi.yml#updateUser
+  - openapi/positron-admin-openapi.yml#deleteUser
+  - openapi/positron-admin-openapi.yml#getAccessToken
+  - openapi/positron-admin-openapi.yml#deleteAccessToken
+- status: 429
+  title: Request was rate limited
+  error_type: client
+  api: inference
+  description: >-
+    The completion request was rate limited. No quota values, RateLimit-* headers or Retry-After
+    header are documented.
+  remediation: Back off and retry with jitter; completions are not idempotent, so retry only on 429/503.
+  source_operations:
+  - openapi/positron-inference-openapi.yml#createChatCompletion
+  - openapi/positron-inference-openapi.yml#createCompletion
+- status: 503
+  title: Service unavailable (overcapacity)
+  error_type: internal error
+  api: inference
+  description: >-
+    "The service is unavailable, likely due to overcapacity." Emitted when the Atlas/Olivaw
+    serving fleet has no capacity for the request.
+  remediation: >-
+    Retry with backoff; check service-node health via the admin API (listServiceNodes) or the
+    Node Health panel in the Olivaw GUI.
+  source_operations:
+  - openapi/positron-inference-openapi.yml#createChatCompletion
+  - openapi/positron-inference-openapi.yml#createCompletion
+gaps:
+- No 401/403 response is documented on either API even though both declare a root-level security requirement.
+- No error `code` registry is published, so errors are not machine-classifiable beyond HTTP status + `type`.
+- The admin document declares a 404 on deleteAccessToken and updateServiceNode whose description reads
+  "The user was not found." / "The model was not found." — apparent copy/paste in the source spec,
+  recorded here verbatim rather than corrected.

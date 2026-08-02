@@ -1,0 +1,124 @@
+generated: '2026-08-02'
+method: derived
+source: openapi/positron-inference-openapi.yml, openapi/positron-admin-openapi.yml
+summary: >-
+  Two overlapping object graphs. The inference API exposes a read-only Model catalogue plus the
+  transient Completion / ChatCompletion result objects. The admin API is the control plane over
+  the same Model catalogue plus ServiceNode (the hardware/backends that serve models), User, and
+  AccessToken. `Model` is the join entity between the two documents — the same id space is
+  addressed by listModels/getModel on both APIs.
+entities:
+- name: Model
+  api: both
+  id_field: id
+  description: A model available for inference, referenced by id on every completion request.
+  fields: [id, object (const "model"), created (unix seconds), owned_by]
+  operations:
+    inference: [listModels, getModel]
+    admin: [listModels, getModel, createModel, updateModel, deleteModel]
+- name: ServiceNode
+  api: admin
+  id_field: id
+  description: >-
+    A backend serving node (Giskard, vLLM or an OpenAI-compatible implementation) registered with
+    Olivaw, carrying a JSON configuration, the list of models it can serve, and an active flag.
+    Health-checked periodically and surfaced in the Olivaw GUI Node Health panel.
+  operations:
+    admin: [listServiceNodes, getServiceNode, createServiceNode, updateServiceNode, deleteServiceNode]
+- name: User
+  api: admin
+  id_field: id
+  description: A platform operator/user of the Olivaw administrative layer.
+  operations:
+    admin: [listUsers, getUser, createUser, updateUser, deleteUser]
+- name: AccessToken
+  api: admin
+  id_field: id
+  description: An API key/access token issued for calling the inference API.
+  operations:
+    admin: [listAccessTokens, getAccessToken, createAccessToken, deleteAccessToken]
+  note: no update operation — tokens are create/read/delete only.
+- name: ChatCompletion
+  api: inference
+  id_field: id
+  description: >-
+    Result of createChatCompletion. Envelope {id, object "chat.completion", created, model,
+    choices[], usage}. Not addressable — no GET by id.
+- name: Completion
+  api: inference
+  id_field: id
+  description: >-
+    Result of createCompletion. Envelope {id, object "text_completion", created, model,
+    choices[], usage}. Not addressable — no GET by id.
+- name: CompletionUsage
+  api: inference
+  description: Token accounting attached to every completion response.
+- name: ChatMessage
+  api: inference
+  description: A single {role, content, function_call?} turn in a chat request.
+relationships:
+- from: Completion
+  to: Model
+  type: belongs_to
+  via: model
+  evidence: CompletionRequest.model / Completion.model reference a Model id.
+- from: ChatCompletion
+  to: Model
+  type: belongs_to
+  via: model
+  evidence: ChatCompletionRequest.model / ChatCompletion.model reference a Model id.
+- from: ChatCompletion
+  to: ChatCompletionChoice
+  type: has_many
+  via: choices
+  evidence: $ref array in ChatCompletion.choices
+- from: Completion
+  to: CompletionChoice
+  type: has_many
+  via: choices
+  evidence: $ref array in Completion.choices
+- from: ChatCompletion
+  to: CompletionUsage
+  type: has_one
+  via: usage
+- from: ChatCompletionRequest
+  to: ChatMessage
+  type: has_many
+  via: messages
+- from: ChatCompletionChoice
+  to: ChatCompletionDelta
+  type: has_one
+  via: delta
+  evidence: streaming chunk shape (ChatCompletionChunk)
+- from: ChatMessage
+  to: ChatRole
+  type: has_one
+  via: role
+- from: ServiceNode
+  to: Model
+  type: has_many
+  via: models
+  evidence: >-
+    ServiceNode carries the list of models it can serve; the Olivaw GUI "Sync Models" action
+    queries a node for its available models.
+- from: Models
+  to: Model
+  type: has_many
+  via: data
+- from: ServiceNodes
+  to: ServiceNode
+  type: has_many
+  via: data
+- from: Users
+  to: User
+  type: has_many
+  via: data
+- from: AccessTokens
+  to: AccessToken
+  type: has_many
+  via: data
+list_envelope:
+  shape: '{object: "list", data: [...]}'
+  applies_to: [Models, ServiceNodes, Users, AccessTokens]
+id_prefixes: []
+id_prefix_note: No documented id prefix scheme; ids are opaque strings.

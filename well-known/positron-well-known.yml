@@ -1,0 +1,78 @@
+generated: '2026-08-02'
+method: probed
+source: live GET of /.well-known/* on every Positron host in apis.yml
+note: >-
+  No /.well-known/ discovery documents are published on any Positron host. api.positron.ai is
+  fronted by Caddy and answers 401 Unauthorized for every path including /.well-known/*, so the
+  entire API surface — discovery documents included — is auth-gated. www.positron.ai and
+  support.positron.ai are Next.js applications that answer 404 for the well-known paths.
+  Absence is recorded data, not a gap in this probe.
+hosts:
+- host: https://www.positron.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /robots.txt
+    status: 200
+  - path: /sitemap.xml
+    status: 200
+- host: https://support.positron.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /robots.txt
+    status: 200
+  - path: /sitemap.xml
+    status: 200
+- host: https://api.positron.ai
+  note: every path on this host returns 401 Unauthorized (Caddy)
+  documents:
+  - path: /.well-known/agent-card.json
+    status: 401
+  - path: /.well-known/agent.json
+    status: 401
+  - path: /openapi.json
+    status: 401
+  - path: /openapi.yaml
+    status: 401
+  - path: /swagger.json
+    status: 401
+  - path: /v1/openapi.json
+    status: 401
+  - path: /v1/models
+    status: 401
+  - path: /docs
+    status: 401
+  - path: /redoc
+    status: 401
+documents: []
