@@ -33,31 +33,16 @@ tags:
 - llm-serving
 - model-hosting
 apis:
-- name: Positron Olivaw OpenAI-Compatible Inference API
-  description: >-
-    OpenAI API-compatible inference endpoint served by Positron's Olivaw serving layer. Lists available models,
-    retrieves a single model, and creates chat completions and raw text completions against models loaded onto
-    Positron Atlas hardware, with optional text/event-stream streaming responses and Positron-specific selection
-    settings (max_tokens, temperature, top_p, top_k). Authenticated with an API key in the authorization header.
-    Because the API mirrors the OpenAI surface, existing OpenAI client libraries can be repointed at a Positron
-    endpoint without code changes.
+- aid: positron:positron-access-tokens-api
+  name: Positron Access Tokens API
+  description: The access_tokens API from Positron — 3 operation(s) for access_tokens.
   humanURL: https://support.positron.ai/api-documentation
   baseURL: https://api.positron.ai/
-  x-baseurl-evidence: >-
-    api.positron.ai is live (Caddy, HTTP/2) and returns 401 Unauthorized on every probed path, including
-    /openapi.json, /v1/models and /.well-known/*, so the surface is entirely auth-gated and could not be
-    enumerated anonymously (probed 2026-08-02). The published OpenAPI declares a deployment-scoped server
-    template `{host}/api/v1` whose default host is `http://localhost:4000` (an on-premises Atlas appliance);
-    the user guide documents hosted endpoints in the form `https://<groupname>-olivaw.fly.dev`.
   tags:
-  - ai-inference
-  - large-language-models
-  - openai-compatible
-  - llm-serving
-  - chat-completions
+  - access_tokens
   properties:
   - type: OpenAPI
-    url: openapi/positron-inference-openapi.yml
+    url: openapi/positron-access-tokens-api-openapi.yml
   - type: Documentation
     url: https://support.positron.ai/api-documentation
   - type: APIReference
@@ -70,42 +55,117 @@ apis:
     url: errors/positron-problem-types.yml
   - type: DataModel
     url: data-model/positron-data-model.yml
-  - type: Overlay
-    url: overlays/positron-inference-overlay.yaml
-- name: Positron Olivaw Admin API
-  description: >-
-    Administrative API for the Olivaw layer that fronts Positron Atlas hardware. Manages the model catalog
-    (list/create/read/update/delete), the service nodes that back it (Giskard, vLLM or OpenAI backends, with
-    per-node JSON configuration and model lists), platform users, and API access tokens. Published by Positron AI
-    as an OpenAPI 3.1.0 document in the public positron-ai/admin-api-docs repository; secured with a bearer
-    API key.
-  humanURL: https://github.com/positron-ai/admin-api-docs
-  baseURL: https://api.positron.ai/
-  x-baseurl-evidence: >-
-    The published admin OpenAPI declares no servers[] block; the admin surface is served per deployment by the
-    Olivaw appliance/cluster. api.positron.ai is Positron's live, auth-gated (401) API host as probed 2026-08-02.
-  tags:
-  - ai-inference
-  - model-hosting
-  - administration
-  - access-tokens
-  - llm-serving
-  properties:
-  - type: OpenAPI
-    url: openapi/positron-admin-openapi.yml
   - type: Documentation
     url: https://github.com/positron-ai/admin-api-docs
   - type: SourceCode
     url: https://github.com/positron-ai/admin-api-docs
+- aid: positron:positron-completion-api
+  name: Positron Completion API
+  description: The completion API from Positron — 2 operation(s) for completion.
+  humanURL: https://support.positron.ai/api-documentation
+  baseURL: https://api.positron.ai/
+  tags:
+  - completion
+  properties:
+  - type: OpenAPI
+    url: openapi/positron-completion-api-openapi.yml
+  - type: Documentation
+    url: https://support.positron.ai/api-documentation
+  - type: APIReference
+    url: https://support.positron.ai/api-documentation
   - type: Authentication
     url: authentication/positron-authentication.yml
+  - type: Conventions
+    url: conventions/positron-conventions.yml
   - type: ErrorCatalog
     url: errors/positron-problem-types.yml
   - type: DataModel
     url: data-model/positron-data-model.yml
-  - type: Overlay
-    url: overlays/positron-admin-overlay.yaml
+  - type: Documentation
+    url: https://github.com/positron-ai/admin-api-docs
+  - type: SourceCode
+    url: https://github.com/positron-ai/admin-api-docs
+- aid: positron:positron-models-api
+  name: Positron Models API
+  description: The models API from Positron — 5 operation(s) for models.
+  humanURL: https://support.positron.ai/api-documentation
+  baseURL: https://api.positron.ai/
+  tags:
+  - models
+  properties:
+  - type: OpenAPI
+    url: openapi/positron-models-api-openapi.yml
+  - type: Documentation
+    url: https://support.positron.ai/api-documentation
+  - type: APIReference
+    url: https://support.positron.ai/api-documentation
+  - type: Authentication
+    url: authentication/positron-authentication.yml
+  - type: Conventions
+    url: conventions/positron-conventions.yml
+  - type: ErrorCatalog
+    url: errors/positron-problem-types.yml
+  - type: DataModel
+    url: data-model/positron-data-model.yml
+  - type: Documentation
+    url: https://github.com/positron-ai/admin-api-docs
+  - type: SourceCode
+    url: https://github.com/positron-ai/admin-api-docs
+- aid: positron:positron-service-nodes-api
+  name: Positron Service Nodes API
+  description: The service_nodes API from Positron — 2 operation(s) for service_nodes.
+  humanURL: https://support.positron.ai/api-documentation
+  baseURL: https://api.positron.ai/
+  tags:
+  - service_nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/positron-service-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://support.positron.ai/api-documentation
+  - type: APIReference
+    url: https://support.positron.ai/api-documentation
+  - type: Authentication
+    url: authentication/positron-authentication.yml
+  - type: Conventions
+    url: conventions/positron-conventions.yml
+  - type: ErrorCatalog
+    url: errors/positron-problem-types.yml
+  - type: DataModel
+    url: data-model/positron-data-model.yml
+  - type: Documentation
+    url: https://github.com/positron-ai/admin-api-docs
+  - type: SourceCode
+    url: https://github.com/positron-ai/admin-api-docs
+- aid: positron:positron-users-api
+  name: Positron Users API
+  description: The users API from Positron — 3 operation(s) for users.
+  humanURL: https://support.positron.ai/api-documentation
+  baseURL: https://api.positron.ai/
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/positron-users-api-openapi.yml
+  - type: Documentation
+    url: https://support.positron.ai/api-documentation
+  - type: APIReference
+    url: https://support.positron.ai/api-documentation
+  - type: Authentication
+    url: authentication/positron-authentication.yml
+  - type: Conventions
+    url: conventions/positron-conventions.yml
+  - type: ErrorCatalog
+    url: errors/positron-problem-types.yml
+  - type: DataModel
+    url: data-model/positron-data-model.yml
+  - type: Documentation
+    url: https://github.com/positron-ai/admin-api-docs
+  - type: SourceCode
+    url: https://github.com/positron-ai/admin-api-docs
 common:
+- type: MCPServer
+  url: mcp/positron-mcp.yml
 - type: DomainSecurity
   url: security/positron-domain-security.yml
 - type: AgenticAccess
@@ -137,9 +197,9 @@ common:
 - type: Twitter
   url: https://twitter.com/positron_ai
 - type: OpenAPI
-  url: openapi/positron-inference-openapi.yml
+  url: openapi/_original/positron-inference-openapi.yml
 - type: OpenAPI
-  url: openapi/positron-admin-openapi.yml
+  url: openapi/_original/positron-admin-openapi.yml
 - type: Authentication
   url: authentication/positron-authentication.yml
 - type: Conventions
