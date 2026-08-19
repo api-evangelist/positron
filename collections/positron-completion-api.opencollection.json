@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Olivaw OpenAI Completion API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "authorization",
+      "value": "{{authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "completion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a model response for the given chat conversation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{host}/api/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint should be used for structured chat interactions.  Note that\navailability of this endpoint may depend on the model requested.\n"
+        },
+        {
+          "info": {
+            "name": "Creates a model response for the given prompt.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{host}/api/v1/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint should be used for raw text completions.  Note that\navailability of this endpoint may depend on the model requested.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

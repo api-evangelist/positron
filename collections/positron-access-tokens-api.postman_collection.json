@@ -1,0 +1,515 @@
+{
+  "item": [
+    {
+      "id": "2130a037-a184-4100-8760-997420a6d7d7",
+      "name": "access_tokens",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c718b924-927f-4c3c-983b-cafc4b09d66e",
+          "name": "Gets a list of all access tokens.",
+          "request": {
+            "name": "Gets a list of all access tokens.",
+            "description": {
+              "content": "Lists the currently available access tokens, providing basic information about each user.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accessTokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the user to filter access tokens"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c48ff8f-d997-4e5e-bf04-a0bf88f2a259",
+              "name": "returns a list of all users.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"55389e41-ae9b-54c7-4761-fa72f7ec5046\",\n    \"name\": \"string\",\n    \"redacted\": \"string\",\n    \"expires_at\": \"2025-05-09T00:28:41.932Z\",\n    \"users\": [\n      {\n        \"id\": \"e9d217ca-2b31-91ca-3479-9435b0cc69a6\",\n        \"name\": \"string\",\n        \"email\": \"string\",\n        \"avatar\": \"string\",\n        \"level\": \"string\"\n      },\n      {\n        \"id\": \"e4bcffed-b007-53fe-afd0-ab587b25631a\",\n        \"name\": \"string\",\n        \"email\": \"string\",\n        \"avatar\": \"string\",\n        \"level\": \"string\"\n      }\n    ]\n  },\n  {\n    \"id\": \"939bd7a4-3d90-af8d-dd31-bc07281df4d7\",\n    \"name\": \"string\",\n    \"redacted\": \"string\",\n    \"expires_at\": \"1990-01-31T12:00:57.029Z\",\n    \"users\": [\n      {\n        \"id\": \"04f9a029-cb08-96ba-9fdc-ced047877399\",\n        \"name\": \"string\",\n        \"email\": \"string\",\n        \"avatar\": \"string\",\n        \"level\": \"string\"\n      },\n      {\n        \"id\": \"ac655909-f5bc-fc4a-f38c-245ea1a44ace\",\n        \"name\": \"string\",\n        \"email\": \"string\",\n        \"avatar\": \"string\",\n        \"level\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f428f27-8f76-48aa-bdb1-8d4a062b2397",
+          "name": "Gets a information about a single access token.",
+          "request": {
+            "name": "Gets a information about a single access token.",
+            "description": {
+              "content": "Shows the selected access token, providing basic information about the token.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accessTokens",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) The ID of the token to request info about"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4612dcc-fd40-4bf0-aa7c-f890c5bc5b57",
+              "name": "Successful retrieval of the access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The ID of the token to request info about"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"8ff92ef4-e9ab-adf2-6385-38767a66e068\",\n  \"name\": \"string\",\n  \"redacted\": \"string\",\n  \"expires_at\": \"1976-05-23T13:27:13.895Z\",\n  \"users\": [\n    {\n      \"id\": \"acb96e93-bd0b-975e-967b-3af02dd8978c\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    },\n    {\n      \"id\": \"8086167b-f919-c9d1-0226-3235cdf4552c\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7ddc414-a6dd-47c1-84c3-3e627266423e",
+              "name": "The access token was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The ID of the token to request info about"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 8908,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7a9e70e-5512-4631-a1f5-1ecca20c3304",
+          "name": "Deletes an access token by token id.",
+          "request": {
+            "name": "Deletes an access token by token id.",
+            "description": {
+              "content": "Removes an access token from the list of available tokens.  The\naccess token will also be purged from the caches of all nodes\nin the cluster\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accessTokens",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) The ID of the access token to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e3f980b-f557-4ca7-8bd1-f0a703f96658",
+              "name": "successful deletion",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The ID of the access token to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"8ff92ef4-e9ab-adf2-6385-38767a66e068\",\n  \"name\": \"string\",\n  \"redacted\": \"string\",\n  \"expires_at\": \"1976-05-23T13:27:13.895Z\",\n  \"users\": [\n    {\n      \"id\": \"acb96e93-bd0b-975e-967b-3af02dd8978c\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    },\n    {\n      \"id\": \"8086167b-f919-c9d1-0226-3235cdf4552c\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "398e8000-a239-42ab-8829-95f752a0866c",
+              "name": "The user was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The ID of the access token to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 8908,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6bd5c6c7-5b3f-41cb-b09a-6f944454651f",
+          "name": "Create a new access token",
+          "request": {
+            "name": "Create a new access token",
+            "description": {
+              "content": "Creates a new access token.  This is not directly populated into the\ntoken cache until it has been used.  Note that the response contains\nfields which are not stored in the database in plaintext and cannot\nbe retrieved at a future date.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accessTokens",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fcaccb0-3c8d-4df6-9a4a-d230d577c60e",
+              "name": "successful creation of an access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"8ff92ef4-e9ab-adf2-6385-38767a66e068\",\n  \"name\": \"string\",\n  \"redacted\": \"string\",\n  \"expires_at\": \"1976-05-23T13:27:13.895Z\",\n  \"users\": [\n    {\n      \"id\": \"acb96e93-bd0b-975e-967b-3af02dd8978c\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    },\n    {\n      \"id\": \"8086167b-f919-c9d1-0226-3235cdf4552c\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2ed50c3-1d7f-413f-9b1a-7599e02e56fa",
+              "name": "invalid information provided to server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 8908,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f58dff34-dde2-4f0a-aeb6-b991b54044a5",
+    "name": "Olivaw Admin Access Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for olivaw administative layer",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2607 @@
+{
+  "item": [
+    {
+      "id": "69902176-5fa1-4fc8-812e-1b68d40c51a4",
+      "name": "models",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8dfb049c-d8b5-4f47-8c82-64296ea5b0d6",
+          "name": "Gets a list of all models.",
+          "request": {
+            "name": "Gets a list of all models.",
+            "description": {
+              "content": "Lists the currently available models, providing basic information about each model.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95dea83e-f9ed-4bd0-b403-fda8a6c63154",
+              "name": "returns a list of all models.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"created\": 271,\n    \"owned_by\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"created\": 2791,\n    \"owned_by\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f6bd9d4-b8a2-42dc-8bf4-5ece6e22f2d3",
+          "name": "Gets a specific model by model id.",
+          "request": {
+            "name": "Gets a specific model by model id.",
+            "description": {
+              "content": "Retrieves a model instance, providing basic information about the model such as\nthe creation time.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models",
+                ":model"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model",
+                  "description": "(Required) The ID of the model to use for this request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c058a90-33f7-455f-b523-130ffb2dbd34",
+              "name": "returns a list of all models.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The ID of the model to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"created\": 9161,\n  \"owned_by\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7318bb95-5976-403a-8907-5e87cd3f1f73",
+              "name": "The model was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The ID of the model to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6dae65a-767b-425c-a703-e3199f33743a",
+          "name": "Updates a specific model by model id.",
+          "request": {
+            "name": "Updates a specific model by model id.",
+            "description": {
+              "content": "Alters information about the model",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models",
+                ":model"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model",
+                  "description": "(Required) The ID of the model to use for this request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"created\": \"<integer>\",\n  \"owned_by\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0f6b190-85f8-47a7-8ca5-a11bc3a021f4",
+              "name": "successful update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The ID of the model to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"created\": \"<integer>\",\n  \"owned_by\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"created\": 9161,\n  \"owned_by\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ca23b47-0f0a-4a8a-b187-8d2c55cb7405",
+              "name": "invalid information provided to update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The ID of the model to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"created\": \"<integer>\",\n  \"owned_by\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df0f0bbf-45bf-484d-8c60-74417361ca9c",
+              "name": "The model was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The ID of the model to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"created\": \"<integer>\",\n  \"owned_by\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e000dff-376b-4130-9b3d-9a59b6aa445e",
+          "name": "Deletes a specific model by model id.",
+          "request": {
+            "name": "Deletes a specific model by model id.",
+            "description": {
+              "content": "Removes a model from the list of available models",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models",
+                ":model"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model",
+                  "description": "(Required) The ID of the model to use for this request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfdbf98c-21d5-4fe8-ab91-6608417f3a26",
+              "name": "successful deletion",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The ID of the model to use for this request"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "79113f02-cbec-46c9-b593-74e76d196933",
+              "name": "The model was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The ID of the model to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fde16981-c11e-423d-8279-a8a8e2bada3d",
+          "name": "Populate information about a model",
+          "request": {
+            "name": "Populate information about a model",
+            "description": {
+              "content": "Creates a model entry\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"created\": \"<integer>\",\n  \"owned_by\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60ea30b7-b61b-431c-8ea4-34c400c7fe2a",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"created\": \"<integer>\",\n  \"owned_by\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"created\": 9161,\n  \"owned_by\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc512ffe-68a8-4db6-95c7-0637c2add47e",
+              "name": "invalid information provided to server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"created\": \"<integer>\",\n  \"owned_by\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0c18649-c137-470f-8923-bf7b93f983b2",
+          "name": "Deletes a service node by node id.",
+          "request": {
+            "name": "Deletes a service node by node id.",
+            "description": {
+              "content": "Removes a service node from the list of available service nodes.\nIf the service node is currently servicing requests, those requests\nwill be drained before halting service, unless `halt=true` is provided\nin the query.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "serviceNodes",
+                ":node"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "description": {
+                    "content": "forces the deletion operation to halt requests being serviced\nby these service nodes.\n",
+                    "type": "text/plain"
+                  },
+                  "key": "halt",
+                  "value": ""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node",
+                  "description": "(Required) The ID of the node to use for this request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ff65520-1ad4-4444-8f09-d5f2f784a65a",
+              "name": "successful deletion",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes",
+                    ":node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "halt",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node",
+                      "description": "(Required) The ID of the node to use for this request"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7edde33d-6045-4943-9157-98bc17d4890d",
+              "name": "The service node was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes",
+                    ":node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "halt",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node",
+                      "description": "(Required) The ID of the node to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13327145-208c-432b-b321-45a2ec33e1b0",
+          "name": "Populate information about a service node",
+          "request": {
+            "name": "Populate information about a service node",
+            "description": {
+              "content": "Creates a service node entry\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "serviceNodes",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"config\": \"<object>\",\n  \"models\": [\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<integer>\",\n      \"owned_by\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<integer>\",\n      \"owned_by\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fb032cf-fd12-41fd-867a-ff4f67b740b8",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"config\": \"<object>\",\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"created\": 8934,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": 7802,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"78d7111d-365e-00c4-5d90-ed1d69ef061d\",\n  \"name\": \"string\",\n  \"backend\": \"string\",\n  \"config\": {},\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"created\": 3206,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": 6295,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f55186d-0703-4642-bf6f-3f74851b5f3d",
+              "name": "invalid information provided to server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"config\": \"<object>\",\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"created\": 8934,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": 7802,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bbcad7d2-2e44-4936-8c59-72f6ab48cb82",
+      "name": "service_nodes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "746504cf-fd69-41dc-a211-36313e64390b",
+          "name": "Gets a list of all service nodes.",
+          "request": {
+            "name": "Gets a list of all service nodes.",
+            "description": {
+              "content": "Lists the currently available service nodes, providing basic information about each node.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "serviceNodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df9ac6bf-6057-42e4-9623-234a5954b991",
+              "name": "returns a list of all service nodes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"0678a924-497d-becb-d6be-131121bd98f4\",\n    \"name\": \"string\",\n    \"backend\": \"string\",\n    \"config\": {},\n    \"models\": [\n      {\n        \"id\": \"string\",\n        \"created\": 5057,\n        \"owned_by\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"created\": 2193,\n        \"owned_by\": \"string\"\n      }\n    ]\n  },\n  {\n    \"id\": \"35b545b6-b078-c6b1-049d-dd521e6e8181\",\n    \"name\": \"string\",\n    \"backend\": \"string\",\n    \"config\": {},\n    \"models\": [\n      {\n        \"id\": \"string\",\n        \"created\": 6930,\n        \"owned_by\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"created\": 685,\n        \"owned_by\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae4a9ac8-08f8-474c-a509-2e67c203d60e",
+          "name": "Gets a specific service node by node id.",
+          "request": {
+            "name": "Gets a specific service node by node id.",
+            "description": {
+              "content": "Retrieves a service node instance, providing basic information about the node.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "serviceNodes",
+                ":node"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node",
+                  "description": "(Required) The ID of the node to use for this request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48dae69e-f930-4dc2-9c6a-47762250295a",
+              "name": "successful retrieval of service node information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes",
+                    ":node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node",
+                      "description": "(Required) The ID of the node to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"78d7111d-365e-00c4-5d90-ed1d69ef061d\",\n  \"name\": \"string\",\n  \"backend\": \"string\",\n  \"config\": {},\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"created\": 3206,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": 6295,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20dcc091-410a-43b4-9e33-0412ec776d35",
+              "name": "The service node was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes",
+                    ":node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node",
+                      "description": "(Required) The ID of the node to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "910f0a89-6bc8-4251-9977-8667d98c2aa7",
+          "name": "Updates a specific service node by service node id.",
+          "request": {
+            "name": "Updates a specific service node by service node id.",
+            "description": {
+              "content": "Alters information about the service node",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "serviceNodes",
+                ":node"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "node",
+                  "description": "(Required) The ID of the service node to use for this request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"config\": \"<object>\",\n  \"models\": [\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<integer>\",\n      \"owned_by\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"created\": \"<integer>\",\n      \"owned_by\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f8fba9be-91fe-4bc9-ba4a-97330a8267fe",
+              "name": "successful update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes",
+                    ":node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node",
+                      "description": "(Required) The ID of the service node to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"config\": \"<object>\",\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"created\": 8934,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": 7802,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"78d7111d-365e-00c4-5d90-ed1d69ef061d\",\n  \"name\": \"string\",\n  \"backend\": \"string\",\n  \"config\": {},\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"created\": 3206,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": 6295,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "189674e3-e354-4a96-9a37-43e17e4f4323",
+              "name": "invalid information provided to update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes",
+                    ":node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node",
+                      "description": "(Required) The ID of the service node to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"config\": \"<object>\",\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"created\": 8934,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": 7802,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc28addc-ee10-433f-88e4-725bcb30c830",
+              "name": "The model was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "serviceNodes",
+                    ":node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "node",
+                      "description": "(Required) The ID of the service node to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"backend\": \"<string>\",\n  \"config\": \"<object>\",\n  \"models\": [\n    {\n      \"id\": \"string\",\n      \"created\": 8934,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": 7802,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bbe16b42-67bc-4ec6-b770-5d4dbcd16a08",
+      "name": "users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "39707219-0e2f-4a64-b9c9-81d0d5cd8dac",
+          "name": "Gets a list of all users.",
+          "request": {
+            "name": "Gets a list of all users.",
+            "description": {
+              "content": "Lists the currently available users, providing basic information about each user.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6963f0c-1b1f-49e8-a51b-7eb542385bd6",
+              "name": "returns a list of all users.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"e839cb10-9546-3000-7ddf-fcd40ecdff09\",\n    \"name\": \"string\",\n    \"email\": \"string\",\n    \"avatar\": \"string\",\n    \"level\": \"string\"\n  },\n  {\n    \"id\": \"c12072cb-3849-9fb8-aaf0-d1728e22b7ea\",\n    \"name\": \"string\",\n    \"email\": \"string\",\n    \"avatar\": \"string\",\n    \"level\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3dccd0cb-b92e-41c0-bc7b-a215f5ecd5b5",
+          "name": "Gets a information about a single user.",
+          "request": {
+            "name": "Gets a information about a single user.",
+            "description": {
+              "content": "Shows the selected users, providing basic information about each user.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user",
+                  "description": "(Required) The ID of the user to use for this request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb7aaf66-86f3-44aa-a29d-6ef8b3541dd0",
+              "name": "returns information about of a single user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) The ID of the user to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3b0ba27a-263f-0fe0-da27-4eb574a13a5f\",\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"avatar\": \"string\",\n  \"level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94de1020-9cff-4f5c-85c1-8b8e977d97c9",
+              "name": "The user was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) The ID of the user to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f14a81a4-66bd-4e43-85f3-90d290b4d3c9",
+          "name": "Updates a specific user by user id.",
+          "request": {
+            "name": "Updates a specific user by user id.",
+            "description": {
+              "content": "Alters information about the user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user",
+                  "description": "(Required) The ID of the user to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"avatar\": \"<url>\",\n  \"level\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cb77a796-cd11-44df-9213-bb47403d9d1b",
+              "name": "successful update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) The ID of the user to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"avatar\": \"<url>\",\n  \"level\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3b0ba27a-263f-0fe0-da27-4eb574a13a5f\",\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"avatar\": \"string\",\n  \"level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8483639e-7b12-4ccc-b147-688e90aff761",
+              "name": "invalid information provided to update",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) The ID of the user to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"avatar\": \"<url>\",\n  \"level\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6885324e-ccb1-4dda-9c12-ea331451e9fc",
+              "name": "The user was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) The ID of the user to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"avatar\": \"<url>\",\n  \"level\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ec483a5-d13e-44fb-a17a-e78ed5c33d9d",
+          "name": "Deletes a specific user by user id.",
+          "request": {
+            "name": "Deletes a specific user by user id.",
+            "description": {
+              "content": "Removes a user from the list of available users",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user",
+                  "description": "(Required) The ID of the user to use for this request"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6de5d34-24c1-4ebf-8c07-fb063d66e981",
+              "name": "successful deletion",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) The ID of the user to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3b0ba27a-263f-0fe0-da27-4eb574a13a5f\",\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"avatar\": \"string\",\n  \"level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "284f056a-a1dd-4f8f-8d94-9bbed07783fa",
+              "name": "The user was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) The ID of the user to use for this request"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fafd988a-c395-469d-8404-998c2137eac5",
+          "name": "Create a new user",
+          "request": {
+            "name": "Create a new user",
+            "description": {
+              "content": "Creates a user entry\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"avatar\": \"<url>\",\n  \"level\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d3207c56-bc08-4e88-aaa6-a4287f1b8d01",
+              "name": "successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"avatar\": \"<url>\",\n  \"level\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3b0ba27a-263f-0fe0-da27-4eb574a13a5f\",\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"avatar\": \"string\",\n  \"level\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7d1775b-da7c-463b-a2cb-e0f4164009da",
+              "name": "invalid information provided to server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"avatar\": \"<url>\",\n  \"level\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "db636917-d73c-46a0-bb08-ab8b26c71de4",
+      "name": "access_tokens",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c453bbc-38ca-4cce-b067-024a21e18c87",
+          "name": "Gets a list of all access tokens.",
+          "request": {
+            "name": "Gets a list of all access tokens.",
+            "description": {
+              "content": "Lists the currently available access tokens, providing basic information about each user.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accessTokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the user to filter access tokens"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffff3484-cf5a-4ef3-9c34-60bc651afbda",
+              "name": "returns a list of all users.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"35391a8c-700b-7367-875f-d2caf5af84eb\",\n    \"name\": \"string\",\n    \"redacted\": \"string\",\n    \"expires_at\": \"1971-03-25T17:30:04.907Z\",\n    \"users\": [\n      {\n        \"id\": \"2c0bef4b-b443-1380-b157-fc05fa277ee7\",\n        \"name\": \"string\",\n        \"email\": \"string\",\n        \"avatar\": \"string\",\n        \"level\": \"string\"\n      },\n      {\n        \"id\": \"a4cfeab8-19df-3b62-20af-cb1ab4b5d3ce\",\n        \"name\": \"string\",\n        \"email\": \"string\",\n        \"avatar\": \"string\",\n        \"level\": \"string\"\n      }\n    ]\n  },\n  {\n    \"id\": \"ba846bc2-803c-7deb-3dd0-9669cfd5d27b\",\n    \"name\": \"string\",\n    \"redacted\": \"string\",\n    \"expires_at\": \"1956-03-11T16:29:25.275Z\",\n    \"users\": [\n      {\n        \"id\": \"aaffb68a-b0ff-c091-60da-0c19c382a30b\",\n        \"name\": \"string\",\n        \"email\": \"string\",\n        \"avatar\": \"string\",\n        \"level\": \"string\"\n      },\n      {\n        \"id\": \"f01ad2ec-57c5-a3c4-a235-d3e11910574c\",\n        \"name\": \"string\",\n        \"email\": \"string\",\n        \"avatar\": \"string\",\n        \"level\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f14b86c7-d80f-4e0f-b3e4-a10c9af6c20e",
+          "name": "Gets a information about a single access token.",
+          "request": {
+            "name": "Gets a information about a single access token.",
+            "description": {
+              "content": "Shows the selected access token, providing basic information about the token.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accessTokens",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) The ID of the token to request info about"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "617b8685-a98f-4d8d-94ff-8fa11215efbb",
+              "name": "Successful retrieval of the access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The ID of the token to request info about"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5e77d182-4cb1-e0d6-19ed-d6c2103160e1\",\n  \"name\": \"string\",\n  \"redacted\": \"string\",\n  \"expires_at\": \"1988-01-18T16:39:32.222Z\",\n  \"users\": [\n    {\n      \"id\": \"95b16bf8-11d7-6992-852f-86787f496ae4\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    },\n    {\n      \"id\": \"8f2f1897-dc4c-ea14-d171-7a370679518b\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c1ff6b7-51e1-4f03-adda-cf070a93657f",
+              "name": "The access token was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The ID of the token to request info about"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d19ea9a-1b6e-4a7f-84f3-185e76640f41",
+          "name": "Deletes an access token by token id.",
+          "request": {
+            "name": "Deletes an access token by token id.",
+            "description": {
+              "content": "Removes an access token from the list of available tokens.  The\naccess token will also be purged from the caches of all nodes\nin the cluster\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accessTokens",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) The ID of the access token to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ef08b63-0d68-46ce-8ad2-c249890db94a",
+              "name": "successful deletion",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The ID of the access token to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5e77d182-4cb1-e0d6-19ed-d6c2103160e1\",\n  \"name\": \"string\",\n  \"redacted\": \"string\",\n  \"expires_at\": \"1988-01-18T16:39:32.222Z\",\n  \"users\": [\n    {\n      \"id\": \"95b16bf8-11d7-6992-852f-86787f496ae4\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    },\n    {\n      \"id\": \"8f2f1897-dc4c-ea14-d171-7a370679518b\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de898ef9-7846-4e5a-ac5e-c157fc986a99",
+              "name": "The user was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The ID of the access token to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50efe1f6-19be-47a0-bc37-5dc64bb0a644",
+          "name": "Create a new access token",
+          "request": {
+            "name": "Create a new access token",
+            "description": {
+              "content": "Creates a new access token.  This is not directly populated into the\ntoken cache until it has been used.  Note that the response contains\nfields which are not stored in the database in plaintext and cannot\nbe retrieved at a future date.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accessTokens",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "47131c41-e62e-4e12-a2c9-3cc0e8698500",
+              "name": "successful creation of an access token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5e77d182-4cb1-e0d6-19ed-d6c2103160e1\",\n  \"name\": \"string\",\n  \"redacted\": \"string\",\n  \"expires_at\": \"1988-01-18T16:39:32.222Z\",\n  \"users\": [\n    {\n      \"id\": \"95b16bf8-11d7-6992-852f-86787f496ae4\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    },\n    {\n      \"id\": \"8f2f1897-dc4c-ea14-d171-7a370679518b\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"avatar\": \"string\",\n      \"level\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0cd1e84-3ccc-4209-a57d-356c71da3dfb",
+              "name": "invalid information provided to server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accessTokens",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 1114,\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "67f9545b-87bf-4d95-ac11-277868eac5fe",
+    "name": "Olivaw Admin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for olivaw administative layer",
+      "type": "text/plain"
+    }
+  }
+}

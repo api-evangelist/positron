@@ -1,0 +1,190 @@
+openapi: 3.2.0
+info:
+  title: Olivaw Admin Access Tokens API
+  description: API for olivaw administative layer
+  version: '1.0'
+security:
+- bearer:
+  - API key
+tags:
+- name: access_tokens
+paths:
+  /accessTokens:
+    get:
+      summary: Gets a list of all access tokens.
+      description: 'Lists the currently available access tokens, providing basic information about each
+        user.
+
+        '
+      tags:
+      - access_tokens
+      operationId: listAccessTokens
+      parameters:
+      - name: user
+        in: query
+        description: The ID of the user to filter access tokens
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: returns a list of all users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokens'
+  /accessTokens/{token}:
+    get:
+      summary: Gets a information about a single access token.
+      description: 'Shows the selected access token, providing basic information about the token.
+
+        '
+      tags:
+      - access_tokens
+      parameters:
+      - name: token
+        in: path
+        description: The ID of the token to request info about
+        required: true
+        schema:
+          type: string
+      operationId: getAccessToken
+      responses:
+        '200':
+          description: Successful retrieval of the access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        '404':
+          description: The access token was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes an access token by token id.
+      description: 'Removes an access token from the list of available tokens.  The
+
+        access token will also be purged from the caches of all nodes
+
+        in the cluster
+
+        '
+      tags:
+      - access_tokens
+      operationId: deleteAccessToken
+      parameters:
+      - name: token
+        in: path
+        description: The ID of the access token to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful deletion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        '404':
+          description: The user was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /accessTokens/new:
+    post:
+      summary: Create a new access token
+      description: 'Creates a new access token.  This is not directly populated into the
+
+        token cache until it has been used.  Note that the response contains
+
+        fields which are not stored in the database in plaintext and cannot
+
+        be retrieved at a future date.
+
+        '
+      tags:
+      - access_tokens
+      operationId: createAccessToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccessToken'
+      responses:
+        '201':
+          description: successful creation of an access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+        '400':
+          description: invalid information provided to server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: human-readable name for the service node
+        email:
+          type: string
+        avatar:
+          type: string
+          format: url
+        level:
+          enum:
+          - superuser
+          - admin
+          - user
+    AccessToken:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        redacted:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        users:
+          oneOf:
+          - $ref: '#/components/schemas/Users'
+          - $ref: '#/components/schemas/IdList'
+    IdList:
+      type: array
+      items:
+        type: string
+        format: uuid
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code associated with this error.
+        error:
+          type: string
+          description: The error message.
+    AccessTokens:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessToken'

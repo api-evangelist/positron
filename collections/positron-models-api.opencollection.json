@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Positron Models API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of all models.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{host}/api/v1/models"
+          },
+          "docs": "Lists the currently available models, providing basic information about each model.\n"
+        },
+        {
+          "info": {
+            "name": "Gets a specific model by model id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{host}/api/v1/models/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the model to use for this request"
+              }
+            ]
+          },
+          "docs": "Retrieves a model instance, providing basic information about the model such as\nthe creation time.\n"
+        },
+        {
+          "info": {
+            "name": "Updates a specific model by model id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{host}/api/v1/models/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the model to use for this request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Alters information about the model"
+        },
+        {
+          "info": {
+            "name": "Deletes a specific model by model id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{host}/api/v1/models/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the model to use for this request"
+              }
+            ]
+          },
+          "docs": "Removes a model from the list of available models"
+        },
+        {
+          "info": {
+            "name": "Populate information about a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{host}/api/v1/models/new",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a model entry\n"
+        },
+        {
+          "info": {
+            "name": "Deletes a service node by node id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{host}/api/v1/serviceNodes/:node",
+            "params": [
+              {
+                "name": "node",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the node to use for this request"
+              },
+              {
+                "name": "halt",
+                "value": "",
+                "type": "query",
+                "description": "forces the deletion operation to halt requests being serviced\nby these service nodes.\n"
+              }
+            ]
+          },
+          "docs": "Removes a service node from the list of available service nodes.\nIf the service node is currently servicing requests, those requests\nwill be drained before halting service, unless `halt=true` is provided\nin the query.\n"
+        },
+        {
+          "info": {
+            "name": "Populate information about a service node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{host}/api/v1/serviceNodes/new",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a service node entry\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

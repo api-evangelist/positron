@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Olivaw OpenAI API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "authorization",
+      "value": "{{authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of all models.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{host}/api/v1/models"
+          },
+          "docs": "Lists the currently available models, providing basic information about each model.\n"
+        },
+        {
+          "info": {
+            "name": "Gets a specific model by model id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{host}/api/v1/models/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the model to use for this request"
+              }
+            ]
+          },
+          "docs": "Retrieves a model instance, providing basic information about the model such as\nthe creation time.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "completion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a model response for the given chat conversation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{host}/api/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint should be used for structured chat interactions.  Note that\navailability of this endpoint may depend on the model requested.\n"
+        },
+        {
+          "info": {
+            "name": "Creates a model response for the given prompt.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{host}/api/v1/completions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint should be used for raw text completions.  Note that\navailability of this endpoint may depend on the model requested.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

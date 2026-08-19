@@ -1,0 +1,31 @@
+{
+  "provider": "positron",
+  "sources": [
+    "positron-access-tokens-api-openapi.yml",
+    "positron-completion-api-openapi.yml",
+    "positron-models-api-openapi.yml",
+    "positron-service-nodes-api-openapi.yml",
+    "positron-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "positron-access-tokens-api-openapi.yml",
+    "positron-completion-api-openapi.yml",
+    "positron-models-api-openapi.yml",
+    "positron-service-nodes-api-openapi.yml",
+    "positron-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [
+    "positron-access-tokens-api-openapi.yml: dangling $ref: #/components/schemas/CreateAccessToken"
+  ],
+  "warnings": [],
+  "notes": [
+    "positron-access-tokens-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "positron-completion-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "positron-models-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "positron-service-nodes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "positron-users-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

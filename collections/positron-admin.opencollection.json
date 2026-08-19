@@ -1,0 +1,381 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Olivaw Admin API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of all models.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/models"
+          },
+          "docs": "Lists the currently available models, providing basic information about each model.\n"
+        },
+        {
+          "info": {
+            "name": "Gets a specific model by model id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/models/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the model to use for this request"
+              }
+            ]
+          },
+          "docs": "Retrieves a model instance, providing basic information about the model such as\nthe creation time.\n"
+        },
+        {
+          "info": {
+            "name": "Updates a specific model by model id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/models/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the model to use for this request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Alters information about the model"
+        },
+        {
+          "info": {
+            "name": "Deletes a specific model by model id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/models/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the model to use for this request"
+              }
+            ]
+          },
+          "docs": "Removes a model from the list of available models"
+        },
+        {
+          "info": {
+            "name": "Populate information about a model",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/models/new",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a model entry\n"
+        },
+        {
+          "info": {
+            "name": "Deletes a service node by node id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/serviceNodes/:node",
+            "params": [
+              {
+                "name": "node",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the node to use for this request"
+              },
+              {
+                "name": "halt",
+                "value": "",
+                "type": "query",
+                "description": "forces the deletion operation to halt requests being serviced\nby these service nodes.\n"
+              }
+            ]
+          },
+          "docs": "Removes a service node from the list of available service nodes.\nIf the service node is currently servicing requests, those requests\nwill be drained before halting service, unless `halt=true` is provided\nin the query.\n"
+        },
+        {
+          "info": {
+            "name": "Populate information about a service node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/serviceNodes/new",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a service node entry\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "service_nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of all service nodes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/serviceNodes"
+          },
+          "docs": "Lists the currently available service nodes, providing basic information about each node.\n"
+        },
+        {
+          "info": {
+            "name": "Gets a specific service node by node id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/serviceNodes/:node",
+            "params": [
+              {
+                "name": "node",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the node to use for this request"
+              }
+            ]
+          },
+          "docs": "Retrieves a service node instance, providing basic information about the node.\n"
+        },
+        {
+          "info": {
+            "name": "Updates a specific service node by service node id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/serviceNodes/:node",
+            "params": [
+              {
+                "name": "node",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the service node to use for this request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Alters information about the service node"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of all users.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users"
+          },
+          "docs": "Lists the currently available users, providing basic information about each user.\n"
+        },
+        {
+          "info": {
+            "name": "Gets a information about a single user.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/users/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to use for this request"
+              }
+            ]
+          },
+          "docs": "Shows the selected users, providing basic information about each user.\n"
+        },
+        {
+          "info": {
+            "name": "Updates a specific user by user id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/users/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Alters information about the user"
+        },
+        {
+          "info": {
+            "name": "Deletes a specific user by user id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/users/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user to use for this request"
+              }
+            ]
+          },
+          "docs": "Removes a user from the list of available users"
+        },
+        {
+          "info": {
+            "name": "Create a new user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/users/new",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a user entry\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "access_tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of all access tokens.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accessTokens",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user to filter access tokens"
+              }
+            ]
+          },
+          "docs": "Lists the currently available access tokens, providing basic information about each user.\n"
+        },
+        {
+          "info": {
+            "name": "Gets a information about a single access token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accessTokens/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the token to request info about"
+              }
+            ]
+          },
+          "docs": "Shows the selected access token, providing basic information about the token.\n"
+        },
+        {
+          "info": {
+            "name": "Deletes an access token by token id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/accessTokens/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the access token to delete"
+              }
+            ]
+          },
+          "docs": "Removes an access token from the list of available tokens.  The\naccess token will also be purged from the caches of all nodes\nin the cluster\n"
+        },
+        {
+          "info": {
+            "name": "Create a new access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accessTokens/new",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new access token.  This is not directly populated into the\ntoken cache until it has been used.  Note that the response contains\nfields which are not stored in the database in plaintext and cannot\nbe retrieved at a future date.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

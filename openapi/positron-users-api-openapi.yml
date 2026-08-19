@@ -1,0 +1,182 @@
+openapi: 3.2.0
+info:
+  title: Olivaw Admin Users API
+  description: API for olivaw administative layer
+  version: '1.0'
+security:
+- bearer:
+  - API key
+tags:
+- name: users
+paths:
+  /users:
+    get:
+      summary: Gets a list of all users.
+      description: 'Lists the currently available users, providing basic information about each user.
+
+        '
+      tags:
+      - users
+      operationId: listUsers
+      responses:
+        '200':
+          description: returns a list of all users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+  /users/{user}:
+    get:
+      summary: Gets a information about a single user.
+      description: 'Shows the selected users, providing basic information about each user.
+
+        '
+      tags:
+      - users
+      parameters:
+      - name: user
+        in: path
+        description: The ID of the user to use for this request
+        required: true
+        schema:
+          type: string
+      operationId: getUser
+      responses:
+        '200':
+          description: returns information about of a single user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: The user was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Updates a specific user by user id.
+      description: Alters information about the user
+      tags:
+      - users
+      operationId: updateUser
+      parameters:
+      - name: user
+        in: path
+        description: The ID of the user to update
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: successful update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: invalid information provided to update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The user was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes a specific user by user id.
+      description: Removes a user from the list of available users
+      tags:
+      - users
+      operationId: deleteUser
+      parameters:
+      - name: user
+        in: path
+        description: The ID of the user to use for this request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful deletion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: The user was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/new:
+    post:
+      summary: Create a new user
+      description: 'Creates a user entry
+
+        '
+      tags:
+      - users
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: invalid information provided to server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code associated with this error.
+        error:
+          type: string
+          description: The error message.
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: human-readable name for the service node
+        email:
+          type: string
+        avatar:
+          type: string
+          format: url
+        level:
+          enum:
+          - superuser
+          - admin
+          - user
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'

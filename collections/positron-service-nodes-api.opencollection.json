@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Olivaw Admin Service Nodes API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "service_nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of all service nodes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/serviceNodes"
+          },
+          "docs": "Lists the currently available service nodes, providing basic information about each node.\n"
+        },
+        {
+          "info": {
+            "name": "Gets a specific service node by node id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/serviceNodes/:node",
+            "params": [
+              {
+                "name": "node",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the node to use for this request"
+              }
+            ]
+          },
+          "docs": "Retrieves a service node instance, providing basic information about the node.\n"
+        },
+        {
+          "info": {
+            "name": "Updates a specific service node by service node id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/serviceNodes/:node",
+            "params": [
+              {
+                "name": "node",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the service node to use for this request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Alters information about the service node"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

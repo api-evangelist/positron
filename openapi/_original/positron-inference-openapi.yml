@@ -1,0 +1,613 @@
+openapi: 3.1.0
+info:
+  title: Olivaw OpenAI API
+  description: OpenAI-based APIs for completions
+  contact:
+    email: api@positron.ai
+  version: '1.0'
+servers:
+- url: '{host}/api/v1'
+  variables:
+    host:
+      default: http://localhost:4000
+      description: |
+        The base server url from which this content will be served.
+security:
+- apiKey: []
+paths:
+  /models:
+    get:
+      summary: Gets a list of all models.
+      description: |
+        Lists the currently available models, providing basic information about each model.
+      tags:
+      - models
+      operationId: listModels
+      responses:
+        '200':
+          description: returns a list of all models.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Models'
+  /models/{model}:
+    get:
+      summary: Gets a specific model by model id.
+      description: |
+        Retrieves a model instance, providing basic information about the model such as
+        the creation time.
+      tags:
+      - models
+      operationId: getModel
+      parameters:
+      - name: model
+        in: path
+        description: The ID of the model to use for this request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: returns the requested model.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '404':
+          description: The model was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /chat/completions:
+    post:
+      summary: Creates a model response for the given chat conversation.
+      tags:
+      - completion
+      operationId: createChatCompletion
+      description: |
+        This endpoint should be used for structured chat interactions.  Note that
+        availability of this endpoint may depend on the model requested.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/ChatCompletionRequest'
+              - $ref: '#/components/schemas/SelectionSettings'
+      responses:
+        '200':
+          description: returns a chat completion object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatCompletion'
+            text/event-stream:
+              schema:
+                type: array
+                format: event-stream
+                items:
+                  $ref: '#/components/schemas/ChatCompletionChunkText'
+        '429':
+          description: The request was rate limited.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: The service is unavailable, likely due to overcapacity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /completions:
+    post:
+      summary: Creates a model response for the given prompt.
+      tags:
+      - completion
+      operationId: createCompletion
+      description: |
+        This endpoint should be used for raw text completions.  Note that
+        availability of this endpoint may depend on the model requested.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CompletionRequest'
+              - $ref: '#/components/schemas/SelectionSettings'
+      responses:
+        '200':
+          description: returns a completion object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Completion'
+            text/event-stream:
+              schema:
+                type: array
+                format: event-stream
+                items:
+                  $ref: '#/components/schemas/Completion'
+        '429':
+          description: The request was rate limited.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          description: The service is unavailable, likely due to overcapacity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        object:
+          const: error
+        type:
+          enum:
+          - client
+          - internal error
+        message:
+          type: string
+          description: The error message.
+      required:
+      - object
+      - type
+      - message
+    Models:
+      type: object
+      properties:
+        object:
+          const: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        object:
+          type: string
+          description: The object type, which is always "model".
+          const: model
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the model was created.
+        owned_by:
+          type: string
+          description: The organization that owns the model
+    SelectionSettings:
+      type: object
+      properties:
+        max_tokens:
+          type:
+          - integer
+          - 'null'
+          description: |
+            The maximum number of tokens to generate in the completion.
+
+            The token count of your prompt plus `max_tokens`` cannot exceed the model's
+            context length.
+        temperature:
+          type:
+          - number
+          - 'null'
+          description: |
+            What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
+            make the output more random, while lower values like 0.2 will make it more focused
+            and deterministic.
+
+            We generally recommend altering this or `top_p` but not both.
+          default: 1
+        top_p:
+          type:
+          - number
+          - 'null'
+          description: |
+            An alternative to sampling with temperature, called nucleus sampling, where the
+            model considers the results of the tokens with top_p probability mass. So 0.1 means
+            only the tokens comprising the top 10% probability mass are considered.
+
+            We generally recommend altering this or `temperature` but not both.
+          maximum: 1
+          minimum: 0
+        top_k:
+          type:
+          - integer
+          - 'null'
+          description: |
+            Picks tokens only out of the `k` tokens with the highest probabilities. A `top_k`
+            of 1 results in deterministic token picking.
+          default: 48
+          maximum: 320
+        n:
+          type:
+          - integer
+          - 'null'
+          description: |
+            How many completions to generate for each prompt.
+
+            NB: this feature is not currently supported.
+          default: 1
+        stream:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: |
+            Whether to stream back partial progress.
+
+            If set, tokens will be sent as data-only server-sent events as they become available,
+            with the stream terminated by a data: [DONE] message. Otherwise, the server will hold
+            the request open until the completion is ready, and return the result in the response.
+        logprobs:
+          type:
+          - integer
+          - 'null'
+          maximum: 5
+          description: |
+            Include the log probabilities on the `logprobs` most likely tokens, as well the chosen
+            tokens. For example, if `logprobs` is 5, the API will return a list of the 5 most
+            likely tokens. If `logprobs` is supplied, the API will always return the logprob of
+            the sampled token, so there may be up to `logprobs+1` elements in the response.
+
+            NB: this option is not currently supported
+        presence_penalty:
+          type:
+          - number
+          - 'null'
+          description: |
+            Number between -2.0 and 2.0. Positive values penalize new tokens based on whether
+            they appear in the text so far, increasing the model's likelihood to talk about new topics.
+
+            NB: this option is not currently supported
+          default: 0
+        frequency_penalty:
+          type:
+          - number
+          - 'null'
+          description: |
+            Number between -2.0 and 2.0. Positive values penalize new tokens based on their
+            existing frequency in the text so far, decreasing the model's likelihood to repeat
+            the same line verbatim.
+
+            NB: this option is not currently supported
+          default: 0
+        seed:
+          type: integer
+          minimum: 0
+          maximum: 65535
+          description: |
+            A value that seeds the random number generator for token picking.  If
+            provided, the tokens generated will be deterministically the same when
+            provided the same prompt.
+        ignore_eos:
+          type: boolean
+          description: |
+            If `true`, continues completion even if any stop token is generated.
+
+            NB: this is equivalent to `stop: null`, and overrides any value for `stop`.
+            NB: not all backends support this option.
+        stop:
+          type:
+          - string
+          - array
+          - 'null'
+          items:
+            type: string
+          description: |
+            Up to 4 sequences where the API will stop generating further tokens.  The returned
+            text will not contain the stop sequence.  If `stop: null` is selected, stop tokens
+            will be emitted but completions will continue.
+
+            NB: currently only the `null`` value is supported.
+            NB: not all backends support this option.
+    CompletionRequest:
+      type: object
+      required:
+      - model
+      - prompt
+      properties:
+        model:
+          type: string
+          description: ID of the model to use.  Use the /models endpoint to list available models.
+        prompt:
+          type:
+          - string
+          - array
+          description: |
+            The prompt(s) to generate completions for, encoded as a string, array of strings,
+            array of tokens, or array of token arrays.
+
+            Note that <|endoftext|> is the document separator that the model sees during training,
+            so if a prompt is not specified the model will generate as if from the beginning of a
+            new document.
+          items:
+            type:
+            - string
+            - integer
+        suffix:
+          type:
+          - string
+          - 'null'
+          description: |
+            The suffix that comes after a completion of inserted text.
+
+            NB: this feature is not currently supported
+        echo:
+          type:
+          - boolean
+          - 'null'
+          default: false
+          description: |
+            Echo back the prompt in addition to the completion.
+
+            NB: this feature is not currently supported
+        best_of:
+          type:
+          - integer
+          - 'null'
+          description: |
+            Generates `best_of` completions server-side and returns the "best" (the one with the
+            lowest log probability per token). Results cannot be streamed.
+
+            NB: this feature is not currently supported
+        user:
+          type:
+          - string
+          - 'null'
+          description: |
+            The user identifier, which can be referenced in the API endpoints.  If not specified,
+            a random user identifier will be generated.
+
+            NB: this feature is not currently supported.
+    Completion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the completion
+        object:
+          const: text_completion
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the completion was created.
+        model:
+          type: string
+          description: The model used for the completion.
+        choices:
+          type: array
+          description: |
+            A list of completion choices. Typically length 1, but can be more than
+            one if `n` in the CompletionRequest is greater than 1.
+          items:
+            $ref: '#/components/schemas/CompletionChoice'
+        usage:
+          $ref: '#/components/schemas/CompletionUsage'
+    CompletionChoice:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The generated completion
+        index:
+          type: integer
+          description: The index of the choice in the list of choices.
+        logprobs:
+          type: object
+          description: |
+            A map of tokens to log probabilities.  The map is only present if `logprobs` is specified
+            in the CompletionRequest.
+          additionalProperties:
+            type: array
+            items:
+              type: number
+        finish_reason:
+          enum:
+          - stop
+          - length
+          - content_filter
+          description: The reason the model stopped generating tokens. This will be `stop` if the model
+            hit a natural stop point or a provided stop sequence, `length` if the maximum number of tokens
+            specified in the request was reached, or `content_filter` if the model detected that the content
+            is sensitive and should not be returned.
+    CompletionUsage:
+      type: object
+      properties:
+        prompt_tokens: integer
+        completion_tokens: integer
+        total_tokens: integer
+    ChatCompletionRequest:
+      type: object
+      required:
+      - model
+      - messages
+      properties:
+        model:
+          type: string
+          description: ID of the model to use.  Use the /models endpoint to list available models.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        functions:
+          type: array
+          description: 'NB: this feature is not currently supported'
+          items:
+            $ref: '#/components/schemas/ChatFunction'
+        function_call:
+          description: |
+            Controls how the model responds to function calls.
+            `none` means the model does not call a function, and responds to the end-user.
+            `auto` means the model can pick between an end-user or calling a function.
+            Specifying a particular function via `{"name": "my_function"}` forces the model
+            to call that function. none is the default when no functions are present. `auto`
+            is the default if functions are present.
+
+            NB: this feature is not currently supported
+          oneOf:
+          - enum:
+            - none
+            - auto
+          - type: object
+            required:
+            - name
+            parameters:
+              name:
+                type: string
+    ChatFunction:
+      type: object
+      required:
+      - name
+      - parameters
+      properties:
+        name:
+          type: string
+          maxLength: 64
+          pattern: ^[a-zA-Z0-9_-]+$
+          description: |
+            The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores
+            and dashes, with a maximum length of 64.
+        description:
+          type: string
+          description: |
+            A description of what the function does, used by the model to choose when
+            and how to call the function
+        parameters:
+          type: object
+          description: |
+            The parameters the functions accepts, described as a JSON Schema object.
+            To describe a function that accepts no parameters, provide the value
+            `{"type": "object", "properties": {}}`.
+    ChatMessage:
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/ChatRole'
+        content:
+          type: string
+          description: The content of the message
+        function_call:
+          $ref: '#/components/schemas/ChatFunctionCall'
+    ChatCompletion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the chat completion
+        object:
+          description: The object type, which is always "chat.completion".
+          const: chat.completion
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the completion was created.
+        model:
+          type: string
+          description: The model used for the chat completion.
+        choices:
+          type: array
+          description: |
+            A list of chat completion choices. Typically length 1, but can be more than
+            one if `n` in the ChatCompletionRequest is greater than 1.
+          items:
+            $ref: '#/components/schemas/ChatCompletionChoice'
+        usage:
+          $ref: '#/components/schemas/CompletionUsage'
+    ChatCompletionChunkText:
+      type: string
+      contentMediaType: application/json
+      contentSchema:
+        $ref: '#/components/schemas/ChatCompletionChunk'
+    ChatCompletionChunk:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the chat completion chunk
+        object:
+          type: string
+          description: The object type, which is always "chat.completion.chunk".
+          const: chat.completion.chunk
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the chunk was created.
+        model:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        choices:
+          type: array
+          description: |
+            A list of chat completion choices. Typically length 1, but can be more than
+            one if `n` in the ChatCompletionRequest is greater than 1.
+          items:
+            $ref: '#/components/schemas/ChatCompletionChoice'
+    ChatCompletionChoice:
+      type: object
+      properties:
+        index:
+          type: integer
+          description: The index of the choice in the list of choices.
+        delta:
+          $ref: '#/components/schemas/ChatCompletionDelta'
+        finish_reason:
+          $ref: '#/components/schemas/ChatFinishReason'
+    ChatCompletionDelta:
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/ChatRole'
+        content:
+          type: string
+          description: The content of the chunk message
+        function_call: null
+    ChatFunctionCall:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the function to call
+        arguments:
+          $ref: '#/components/schemas/ChatFunctionArguments'
+    ChatRole:
+      description: The role of the author of the message.
+      enum:
+      - system
+      - user
+      - assistant
+      - function
+    ChatFinishReason:
+      description: |
+        The reason the model stopped generating tokens. This will be `stop` if the
+        model hit a natural stop point or a provided stop sequence, `length` if the
+        maximum number of tokens specified in the request was reached, or
+        `function_call` if the model called a function.
+      enum:
+      - stop
+      - length
+      - function_call
+    ChatFunctionArguments:
+      type: string
+      description: |
+        The arguments to call the function with, as generated by the model
+        in JSON format. Note that the model does not always generate valid
+        JSON, and may hallucinate parameters not defined by your function
+        schema. Validate the arguments in your code before calling your function.
+      contentMediaType: application/json
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: authorization
+      in: header
+tags:
+- name: models
+- name: completion

@@ -1,0 +1,789 @@
+{
+  "item": [
+    {
+      "id": "2323f1a0-f380-4259-9f42-0a288b2d79b1",
+      "name": "models",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc53d0e6-97fa-4fd4-9072-a5848df62f18",
+          "name": "Gets a list of all models.",
+          "request": {
+            "name": "Gets a list of all models.",
+            "description": {
+              "content": "Lists the currently available models, providing basic information about each model.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The base server url from which this content will be served.\n",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f80fd71a-6355-4acb-8d9c-1997f77759c5",
+              "name": "returns a list of all models.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The base server url from which this content will be served.\n",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {},\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"string\",\n      \"created\": 5476,\n      \"owned_by\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"string\",\n      \"created\": 3559,\n      \"owned_by\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "115a2e35-9099-45be-a0cc-7e7b81d559fb",
+          "name": "Gets a specific model by model id.",
+          "request": {
+            "name": "Gets a specific model by model id.",
+            "description": {
+              "content": "Retrieves a model instance, providing basic information about the model such as\nthe creation time.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "models",
+                ":model"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "model",
+                  "description": "(Required) The ID of the model to use for this request"
+                },
+                {
+                  "description": "The base server url from which this content will be served.\n",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97a256cd-bf2d-4919-9a6f-34c94481267d",
+              "name": "returns the requested model.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The ID of the model to use for this request"
+                    },
+                    {
+                      "description": "The base server url from which this content will be served.\n",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"string\",\n  \"created\": 4064,\n  \"owned_by\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddf6afac-33b6-4de0-9e97-e402500a0f2e",
+              "name": "The model was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models",
+                    ":model"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "model",
+                      "description": "(Required) The ID of the model to use for this request"
+                    },
+                    {
+                      "description": "The base server url from which this content will be served.\n",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {},\n  \"type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3b3fe72d-3019-4958-9531-6252fa9cd65a",
+      "name": "completion",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "09f685fc-f765-49b4-9be8-f27ccb7d2d97",
+          "name": "Creates a model response for the given chat conversation.",
+          "request": {
+            "name": "Creates a model response for the given chat conversation.",
+            "description": {
+              "content": "This endpoint should be used for structured chat interactions.  Note that\navailability of this endpoint may depend on the model requested.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chat",
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The base server url from which this content will be served.\n",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\",\n      \"function_call\": {\n        \"name\": \"<string>\",\n        \"arguments\": \"<string>\"\n      }\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\",\n      \"function_call\": {\n        \"name\": \"<string>\",\n        \"arguments\": \"<string>\"\n      }\n    }\n  ],\n  \"functions\": [\n    {\n      \"name\": \"<string>\",\n      \"parameters\": \"<object>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"parameters\": \"<object>\",\n      \"description\": \"<string>\"\n    }\n  ],\n  \"function_call\": \"<string>\",\n  \"max_tokens\": \"<integer,null>\",\n  \"temperature\": 1,\n  \"top_p\": \"<number,null>\",\n  \"top_k\": 48,\n  \"n\": 1,\n  \"stream\": false,\n  \"logprobs\": \"<integer,null>\",\n  \"presence_penalty\": 0,\n  \"frequency_penalty\": 0,\n  \"seed\": \"<integer>\",\n  \"ignore_eos\": \"<boolean>\",\n  \"stop\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8796b34b-e39c-4967-aff0-7af51dbecc81",
+              "name": "returns a chat completion object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The base server url from which this content will be served.\n",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"string\",\n  \"messages\": [\n    {\n      \"role\": \"string\",\n      \"content\": \"string\",\n      \"function_call\": {\n        \"name\": \"string\",\n        \"arguments\": \"string\"\n      }\n    },\n    {\n      \"role\": \"string\",\n      \"content\": \"string\",\n      \"function_call\": {\n        \"name\": \"string\",\n        \"arguments\": \"string\"\n      }\n    }\n  ],\n  \"functions\": [\n    {\n      \"name\": \"2f\",\n      \"parameters\": {},\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"_ljWqqoOQ\",\n      \"parameters\": {},\n      \"description\": \"string\"\n    }\n  ],\n  \"function_call\": \"string\",\n  \"max_tokens\": 3613,\n  \"temperature\": 1,\n  \"top_p\": 0.28161628492214896,\n  \"top_k\": 48,\n  \"n\": 1,\n  \"stream\": false,\n  \"logprobs\": 1,\n  \"presence_penalty\": 0,\n  \"frequency_penalty\": 0,\n  \"seed\": 17079,\n  \"ignore_eos\": true,\n  \"stop\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": {},\n  \"created\": 7356,\n  \"model\": \"string\",\n  \"choices\": [\n    {\n      \"index\": 7655,\n      \"delta\": {\n        \"role\": \"string\",\n        \"content\": \"string\"\n      },\n      \"finish_reason\": \"string\"\n    },\n    {\n      \"index\": 5883,\n      \"delta\": {\n        \"role\": \"string\",\n        \"content\": \"string\"\n      },\n      \"finish_reason\": \"string\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": {},\n    \"completion_tokens\": {},\n    \"total_tokens\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41e48760-e45a-4af8-8ae2-106becc467ed",
+              "name": "The request was rate limited.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The base server url from which this content will be served.\n",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"string\",\n  \"messages\": [\n    {\n      \"role\": \"string\",\n      \"content\": \"string\",\n      \"function_call\": {\n        \"name\": \"string\",\n        \"arguments\": \"string\"\n      }\n    },\n    {\n      \"role\": \"string\",\n      \"content\": \"string\",\n      \"function_call\": {\n        \"name\": \"string\",\n        \"arguments\": \"string\"\n      }\n    }\n  ],\n  \"functions\": [\n    {\n      \"name\": \"2f\",\n      \"parameters\": {},\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"_ljWqqoOQ\",\n      \"parameters\": {},\n      \"description\": \"string\"\n    }\n  ],\n  \"function_call\": \"string\",\n  \"max_tokens\": 3613,\n  \"temperature\": 1,\n  \"top_p\": 0.28161628492214896,\n  \"top_k\": 48,\n  \"n\": 1,\n  \"stream\": false,\n  \"logprobs\": 1,\n  \"presence_penalty\": 0,\n  \"frequency_penalty\": 0,\n  \"seed\": 17079,\n  \"ignore_eos\": true,\n  \"stop\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {},\n  \"type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e83b3da-4159-4033-9445-443258e9cfbe",
+              "name": "The service is unavailable, likely due to overcapacity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The base server url from which this content will be served.\n",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"string\",\n  \"messages\": [\n    {\n      \"role\": \"string\",\n      \"content\": \"string\",\n      \"function_call\": {\n        \"name\": \"string\",\n        \"arguments\": \"string\"\n      }\n    },\n    {\n      \"role\": \"string\",\n      \"content\": \"string\",\n      \"function_call\": {\n        \"name\": \"string\",\n        \"arguments\": \"string\"\n      }\n    }\n  ],\n  \"functions\": [\n    {\n      \"name\": \"2f\",\n      \"parameters\": {},\n      \"description\": \"string\"\n    },\n    {\n      \"name\": \"_ljWqqoOQ\",\n      \"parameters\": {},\n      \"description\": \"string\"\n    }\n  ],\n  \"function_call\": \"string\",\n  \"max_tokens\": 3613,\n  \"temperature\": 1,\n  \"top_p\": 0.28161628492214896,\n  \"top_k\": 48,\n  \"n\": 1,\n  \"stream\": false,\n  \"logprobs\": 1,\n  \"presence_penalty\": 0,\n  \"frequency_penalty\": 0,\n  \"seed\": 17079,\n  \"ignore_eos\": true,\n  \"stop\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {},\n  \"type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "135af3c3-4909-4625-99d4-c35056cac051",
+          "name": "Creates a model response for the given prompt.",
+          "request": {
+            "name": "Creates a model response for the given prompt.",
+            "description": {
+              "content": "This endpoint should be used for raw text completions.  Note that\navailability of this endpoint may depend on the model requested.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The base server url from which this content will be served.\n",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"prompt\": \"string\",\n  \"suffix\": \"<string,null>\",\n  \"echo\": false,\n  \"best_of\": \"<integer,null>\",\n  \"user\": \"<string,null>\",\n  \"max_tokens\": \"<integer,null>\",\n  \"temperature\": 1,\n  \"top_p\": \"<number,null>\",\n  \"top_k\": 48,\n  \"n\": 1,\n  \"stream\": false,\n  \"logprobs\": \"<integer,null>\",\n  \"presence_penalty\": 0,\n  \"frequency_penalty\": 0,\n  \"seed\": \"<integer>\",\n  \"ignore_eos\": \"<boolean>\",\n  \"stop\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "648a469d-7550-43c6-8029-cb64a719714c",
+              "name": "returns a completion object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The base server url from which this content will be served.\n",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"string\",\n  \"prompt\": \"string\",\n  \"suffix\": \"string\",\n  \"echo\": false,\n  \"best_of\": 3032,\n  \"user\": \"string\",\n  \"max_tokens\": 450,\n  \"temperature\": 1,\n  \"top_p\": 0.5490146309659371,\n  \"top_k\": 48,\n  \"n\": 1,\n  \"stream\": false,\n  \"logprobs\": 4,\n  \"presence_penalty\": 0,\n  \"frequency_penalty\": 0,\n  \"seed\": 47877,\n  \"ignore_eos\": true,\n  \"stop\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": {},\n  \"created\": 9669,\n  \"model\": \"string\",\n  \"choices\": [\n    {\n      \"text\": \"string\",\n      \"index\": 3248,\n      \"logprobs\": {\n        \"key_0\": [\n          7635.844190475044,\n          7557.70109483813\n        ]\n      },\n      \"finish_reason\": \"string\"\n    },\n    {\n      \"text\": \"string\",\n      \"index\": 2656,\n      \"logprobs\": {\n        \"key_0\": [\n          9801.427185808412,\n          3329.8659734053713\n        ],\n        \"key_1\": [\n          6913.443311707397,\n          887.6394009756194\n        ]\n      },\n      \"finish_reason\": \"string\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": {},\n    \"completion_tokens\": {},\n    \"total_tokens\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3483e651-c906-46cb-9484-91bc3cb5d09d",
+              "name": "The request was rate limited.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The base server url from which this content will be served.\n",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"string\",\n  \"prompt\": \"string\",\n  \"suffix\": \"string\",\n  \"echo\": false,\n  \"best_of\": 3032,\n  \"user\": \"string\",\n  \"max_tokens\": 450,\n  \"temperature\": 1,\n  \"top_p\": 0.5490146309659371,\n  \"top_k\": 48,\n  \"n\": 1,\n  \"stream\": false,\n  \"logprobs\": 4,\n  \"presence_penalty\": 0,\n  \"frequency_penalty\": 0,\n  \"seed\": 47877,\n  \"ignore_eos\": true,\n  \"stop\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {},\n  \"type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb75b3fe-bb7e-4319-b351-c082cc72543a",
+              "name": "The service is unavailable, likely due to overcapacity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The base server url from which this content will be served.\n",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"string\",\n  \"prompt\": \"string\",\n  \"suffix\": \"string\",\n  \"echo\": false,\n  \"best_of\": 3032,\n  \"user\": \"string\",\n  \"max_tokens\": 450,\n  \"temperature\": 1,\n  \"top_p\": 0.5490146309659371,\n  \"top_k\": 48,\n  \"n\": 1,\n  \"stream\": false,\n  \"logprobs\": 4,\n  \"presence_penalty\": 0,\n  \"frequency_penalty\": 0,\n  \"seed\": 47877,\n  \"ignore_eos\": true,\n  \"stop\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": {},\n  \"type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The base server url from which this content will be served.\n",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "http://localhost:4000",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "{{host}}/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "258eb588-2e91-49de-b578-701a16257846",
+    "name": "Olivaw OpenAI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAI-based APIs for completions\n\nContact Support:\n Email: api@positron.ai",
+      "type": "text/plain"
+    }
+  }
+}

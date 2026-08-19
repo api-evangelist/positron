@@ -10,10 +10,9 @@ search_evidence:
   - https://github.com/positron-ai (14 public repositories)
   - npm/@modelcontextprotocol namespace and MCP registry/web search for "Positron AI MCP"
   - https://mcp.positron.ai (wildcard DNS, no HTTPS listener)
-  result: >-
-    Positron AI publishes no hosted or packaged MCP server as of 2026-08-02. The tools below are a
-    DERIVED candidate design, one per real OpenAPI operationId, not a provider claim. No
-    `MCPServer` pointer is wired in apis.yml because no MCP server exists.
+  result: Positron AI publishes no hosted or packaged MCP server as of 2026-08-02. The tools below are
+    a DERIVED candidate design, one per real OpenAPI operationId, not a provider claim. No `MCPServer`
+    pointer is wired in apis.yml because no MCP server exists.
 tools:
 - name: list_models
   description: List the models currently available for inference.
@@ -67,10 +66,13 @@ admin_tools:
 - name: admin_delete_access_token
   source_operation: openapi/positron-admin-openapi.yml#deleteAccessToken
 notes:
-- >-
-  Every candidate tool inherits its real input contract from the referenced operation's
-  parameters/requestBody in the OpenAPI; nothing here is invented.
-- >-
-  The admin tools mutate a control plane (including minting inference credentials); see
-  agentic-access/positron-agentic-access.yml for the recommended execution contracts before
-  exposing any of them to an agent.
+- Every candidate tool inherits its real input contract from the referenced operation's parameters/requestBody
+  in the OpenAPI; nothing here is invented.
+- The admin tools mutate a control plane (including minting inference credentials); see agentic-access/positron-agentic-access.yml
+  for the recommended execution contracts before exposing any of them to an agent.
+deployment:
+  mode: none
+  verified: derived
+  tools: 4
+  checked: '2026-08-12'
+  source: catalog MCP census

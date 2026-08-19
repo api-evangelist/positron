@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Olivaw Admin Access Tokens API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "access_tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets a list of all access tokens.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accessTokens",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user to filter access tokens"
+              }
+            ]
+          },
+          "docs": "Lists the currently available access tokens, providing basic information about each user.\n"
+        },
+        {
+          "info": {
+            "name": "Gets a information about a single access token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accessTokens/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the token to request info about"
+              }
+            ]
+          },
+          "docs": "Shows the selected access token, providing basic information about the token.\n"
+        },
+        {
+          "info": {
+            "name": "Deletes an access token by token id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/accessTokens/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the access token to delete"
+              }
+            ]
+          },
+          "docs": "Removes an access token from the list of available tokens.  The\naccess token will also be purged from the caches of all nodes\nin the cluster\n"
+        },
+        {
+          "info": {
+            "name": "Create a new access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accessTokens/new",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new access token.  This is not directly populated into the\ntoken cache until it has been used.  Note that the response contains\nfields which are not stored in the database in plaintext and cannot\nbe retrieved at a future date.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

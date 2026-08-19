@@ -1,0 +1,298 @@
+openapi: 3.2.0
+info:
+  title: Positron Models API
+  version: '1.0'
+  description: 'Operations tagged models across 2 of this provider''s published API definitions: positron-admin-openapi.yml, positron-inference-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: '{host}/api/v1'
+  variables:
+    host:
+      default: http://localhost:4000
+      description: 'The base server url from which this content will be served.
+
+        '
+tags:
+- name: models
+paths:
+  /models:
+    get:
+      summary: Gets a list of all models.
+      description: 'Lists the currently available models, providing basic information about each model.
+
+        '
+      tags:
+      - models
+      operationId: listModels
+      responses:
+        '200':
+          description: returns a list of all models.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Models'
+      security:
+      - bearer:
+        - API key
+  /models/{model}:
+    get:
+      summary: Gets a specific model by model id.
+      description: 'Retrieves a model instance, providing basic information about the model such as
+
+        the creation time.
+
+        '
+      tags:
+      - models
+      operationId: getModel
+      parameters:
+      - name: model
+        in: path
+        description: The ID of the model to use for this request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: returns a list of all models.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '404':
+          description: The model was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearer:
+        - API key
+    patch:
+      summary: Updates a specific model by model id.
+      description: Alters information about the model
+      tags:
+      - models
+      operationId: updateModel
+      parameters:
+      - name: model
+        in: path
+        description: The ID of the model to use for this request
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model'
+      responses:
+        '200':
+          description: successful update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '400':
+          description: invalid information provided to update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The model was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearer:
+        - API key
+    delete:
+      summary: Deletes a specific model by model id.
+      description: Removes a model from the list of available models
+      tags:
+      - models
+      operationId: deleteModel
+      parameters:
+      - name: model
+        in: path
+        description: The ID of the model to use for this request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful deletion
+        '404':
+          description: The model was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearer:
+        - API key
+  /models/new:
+    post:
+      summary: Populate information about a model
+      description: 'Creates a model entry
+
+        '
+      tags:
+      - models
+      operationId: createModel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model'
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '400':
+          description: invalid information provided to server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearer:
+        - API key
+  /serviceNodes/{node}:
+    delete:
+      summary: Deletes a service node by node id.
+      description: 'Removes a service node from the list of available service nodes.
+
+        If the service node is currently servicing requests, those requests
+
+        will be drained before halting service, unless `halt=true` is provided
+
+        in the query.
+
+        '
+      tags:
+      - models
+      operationId: deleteServiceNode
+      parameters:
+      - name: node
+        in: path
+        description: The ID of the node to use for this request
+        required: true
+        schema:
+          type: string
+      - name: halt
+        in: query
+        description: 'forces the deletion operation to halt requests being serviced
+
+          by these service nodes.
+
+          '
+      responses:
+        '200':
+          description: successful deletion
+        '404':
+          description: The service node was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearer:
+        - API key
+  /serviceNodes/new:
+    post:
+      summary: Populate information about a service node
+      description: 'Creates a service node entry
+
+        '
+      tags:
+      - models
+      operationId: createServiceNode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceNode'
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNode'
+        '400':
+          description: invalid information provided to server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - bearer:
+        - API key
+components:
+  schemas:
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the model was created.
+        owned_by:
+          type: string
+          description: The organization that owns the model
+    Models:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model'
+    IdList:
+      type: array
+      items:
+        type: string
+        format: uuid
+    ServiceNode:
+      type: object
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+          description: human-readable name for the service node
+        backend:
+          enum:
+          - OpenAINode
+          - VllmNode
+          - GiskardNode
+        config:
+          type: object
+        models:
+          oneOf:
+          - $ref: '#/components/schemas/Models'
+          - $ref: '#/components/schemas/IdList'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code associated with this error.
+        error:
+          type: string
+          description: The error message.
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: authorization
+      in: header
+x-refined-from:
+- positron-admin-openapi.yml
+- positron-inference-openapi.yml

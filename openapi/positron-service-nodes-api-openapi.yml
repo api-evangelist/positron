@@ -1,0 +1,151 @@
+openapi: 3.2.0
+info:
+  title: Olivaw Admin Service Nodes API
+  description: API for olivaw administative layer
+  version: '1.0'
+security:
+- bearer:
+  - API key
+tags:
+- name: service_nodes
+paths:
+  /serviceNodes:
+    get:
+      summary: Gets a list of all service nodes.
+      description: 'Lists the currently available service nodes, providing basic information about each
+        node.
+
+        '
+      tags:
+      - service_nodes
+      operationId: listServiceNodes
+      responses:
+        '200':
+          description: returns a list of all service nodes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNodes'
+  /serviceNodes/{node}:
+    get:
+      summary: Gets a specific service node by node id.
+      description: 'Retrieves a service node instance, providing basic information about the node.
+
+        '
+      tags:
+      - service_nodes
+      operationId: getServiceNode
+      parameters:
+      - name: node
+        in: path
+        description: The ID of the node to use for this request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful retrieval of service node information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNode'
+        '404':
+          description: The service node was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: Updates a specific service node by service node id.
+      description: Alters information about the service node
+      tags:
+      - service_nodes
+      operationId: updateServiceNode
+      parameters:
+      - name: node
+        in: path
+        description: The ID of the service node to use for this request
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceNode'
+      responses:
+        '200':
+          description: successful update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNode'
+        '400':
+          description: invalid information provided to update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The model was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the model was created.
+        owned_by:
+          type: string
+          description: The organization that owns the model
+    Models:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model'
+    IdList:
+      type: array
+      items:
+        type: string
+        format: uuid
+    ServiceNodes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ServiceNode'
+    ServiceNode:
+      type: object
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+          description: human-readable name for the service node
+        backend:
+          enum:
+          - OpenAINode
+          - VllmNode
+          - GiskardNode
+        config:
+          type: object
+        models:
+          oneOf:
+          - $ref: '#/components/schemas/Models'
+          - $ref: '#/components/schemas/IdList'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code associated with this error.
+        error:
+          type: string
+          description: The error message.
