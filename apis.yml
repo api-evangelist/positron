@@ -20,6 +20,19 @@ specificationVersion: '0.23'
 created: '2026-08-02'
 modified: '2026-08-02'
 tags:
+- Artificial Intelligence
+- AI Inference
+- inference-hardware
+- AI Accelerators
+- Large Language Models
+- Transformers
+- OpenAI-Compatible
+- Machine-Learning
+- Semiconductors
+- Data-Center
+- llm-serving
+- Model Hosting
+tags_raw:
 - artificial-intelligence
 - ai-inference
 - inference-hardware
@@ -39,6 +52,8 @@ apis:
   humanURL: https://support.positron.ai/api-documentation
   baseURL: https://api.positron.ai/
   tags:
+  - Access Tokens
+  tags_raw:
   - access_tokens
   properties:
   - type: OpenAPI
@@ -65,6 +80,8 @@ apis:
   humanURL: https://support.positron.ai/api-documentation
   baseURL: https://api.positron.ai/
   tags:
+  - Completion
+  tags_raw:
   - completion
   properties:
   - type: OpenAPI
@@ -91,6 +108,8 @@ apis:
   humanURL: https://support.positron.ai/api-documentation
   baseURL: https://api.positron.ai/
   tags:
+  - Models
+  tags_raw:
   - models
   properties:
   - type: OpenAPI
@@ -116,7 +135,8 @@ apis:
   description: The service_nodes API from Positron — 2 operation(s) for service_nodes.
   humanURL: https://support.positron.ai/api-documentation
   baseURL: https://api.positron.ai/
-  tags:
+  tags: []
+  tags_raw:
   - service_nodes
   properties:
   - type: OpenAPI
@@ -143,6 +163,8 @@ apis:
   humanURL: https://support.positron.ai/api-documentation
   baseURL: https://api.positron.ai/
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
