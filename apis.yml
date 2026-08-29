@@ -12,6 +12,18 @@ description: >-
   The company raised a $230M Series B in February 2026 at a valuation above $1B from ARENA, Jump Trading, Unless,
   the Qatar Investment Authority, Arm, Helena, DFJ Growth, Atreides, Valor, Resilience Reserve, Flume Ventures and
   1517 Fund.
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 image: https://www.positron.ai/opengraph-image-pwu6ef.png
 url: https://raw.githubusercontent.com/api-evangelist/positron/refs/heads/main/apis.yml
 x-type: company
@@ -186,6 +198,8 @@ apis:
   - type: SourceCode
     url: https://github.com/positron-ai/admin-api-docs
 common:
+- type: IssueTracker
+  url: https://github.com/positron-ai/admin-api-docs/issues
 - type: MCPServer
   url: mcp/positron-mcp.yml
 - type: DomainSecurity
