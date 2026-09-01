@@ -32,18 +32,18 @@ specificationVersion: '0.23'
 created: '2026-08-02'
 modified: '2026-08-02'
 tags:
-- artificial-intelligence
-- ai-inference
+- Artificial Intelligence
+- AI Inference
 - inference-hardware
-- ai-accelerators
-- large-language-models
-- transformers
-- openai-compatible
-- machine-learning
-- semiconductors
-- data-center
+- AI Accelerators
+- Large Language Models
+- Transformers
+- OpenAI-Compatible
+- Machine-Learning
+- Semiconductors
+- Data-Center
 - llm-serving
-- model-hosting
+- Model Hosting
 tags_raw:
 - artificial-intelligence
 - ai-inference
@@ -63,7 +63,8 @@ apis:
   description: The access_tokens API from Positron — 3 operation(s) for access_tokens.
   humanURL: https://support.positron.ai/api-documentation
   baseURL: https://api.positron.ai/
-  tags: []
+  tags:
+  - Access Tokens
   tags_raw:
   - access_tokens
   properties:
@@ -91,7 +92,7 @@ apis:
   humanURL: https://support.positron.ai/api-documentation
   baseURL: https://api.positron.ai/
   tags:
-  - completion
+  - Completion
   tags_raw:
   - completion
   properties:
