@@ -7,16 +7,14 @@ security:
 - bearer:
   - API key
 tags:
-- name: users
+- name: Users
 paths:
   /users:
     get:
-      summary: Gets a list of all users.
-      description: 'Lists the currently available users, providing basic information about each user.
-
-        '
+      summary: Gets a list of all users
+      description: Lists the currently available users, providing basic information about each user.
       tags:
-      - users
+      - Users
       operationId: listUsers
       responses:
         '200':
@@ -27,12 +25,10 @@ paths:
                 $ref: '#/components/schemas/Users'
   /users/{user}:
     get:
-      summary: Gets a information about a single user.
-      description: 'Shows the selected users, providing basic information about each user.
-
-        '
+      summary: Gets a information about a single user
+      description: Shows the selected users, providing basic information about each user.
       tags:
-      - users
+      - Users
       parameters:
       - name: user
         in: path
@@ -55,10 +51,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     patch:
-      summary: Updates a specific user by user id.
+      summary: Updates a specific user by user id
       description: Alters information about the user
       tags:
-      - users
+      - Users
       operationId: updateUser
       parameters:
       - name: user
@@ -93,10 +89,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
-      summary: Deletes a specific user by user id.
+      summary: Deletes a specific user by user id
       description: Removes a user from the list of available users
       tags:
-      - users
+      - Users
       operationId: deleteUser
       parameters:
       - name: user
@@ -121,11 +117,9 @@ paths:
   /users/new:
     post:
       summary: Create a new user
-      description: 'Creates a user entry
-
-        '
+      description: Creates a user entry
       tags:
-      - users
+      - Users
       operationId: createUser
       requestBody:
         required: true

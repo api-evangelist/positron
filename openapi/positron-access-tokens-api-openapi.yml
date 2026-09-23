@@ -7,17 +7,14 @@ security:
 - bearer:
   - API key
 tags:
-- name: access_tokens
+- name: Access Tokens
 paths:
   /accessTokens:
     get:
-      summary: Gets a list of all access tokens.
-      description: 'Lists the currently available access tokens, providing basic information about each
-        user.
-
-        '
+      summary: Gets a list of all access tokens
+      description: Lists the currently available access tokens, providing basic information about each user.
       tags:
-      - access_tokens
+      - Access Tokens
       operationId: listAccessTokens
       parameters:
       - name: user
@@ -35,12 +32,10 @@ paths:
                 $ref: '#/components/schemas/AccessTokens'
   /accessTokens/{token}:
     get:
-      summary: Gets a information about a single access token.
-      description: 'Shows the selected access token, providing basic information about the token.
-
-        '
+      summary: Gets a information about a single access token
+      description: Shows the selected access token, providing basic information about the token.
       tags:
-      - access_tokens
+      - Access Tokens
       parameters:
       - name: token
         in: path
@@ -63,16 +58,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     delete:
-      summary: Deletes an access token by token id.
-      description: 'Removes an access token from the list of available tokens.  The
+      summary: Deletes an access token by token id
+      description: 'Removes an access token from the list of available tokens. The
 
         access token will also be purged from the caches of all nodes
 
-        in the cluster
-
-        '
+        in the cluster'
       tags:
-      - access_tokens
+      - Access Tokens
       operationId: deleteAccessToken
       parameters:
       - name: token
@@ -97,17 +90,15 @@ paths:
   /accessTokens/new:
     post:
       summary: Create a new access token
-      description: 'Creates a new access token.  This is not directly populated into the
+      description: 'Creates a new access token. This is not directly populated into the
 
-        token cache until it has been used.  Note that the response contains
+        token cache until it has been used. Note that the response contains
 
         fields which are not stored in the database in plaintext and cannot
 
-        be retrieved at a future date.
-
-        '
+        be retrieved at a future date.'
       tags:
-      - access_tokens
+      - Access Tokens
       operationId: createAccessToken
       requestBody:
         required: true
@@ -130,6 +121,14 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    AccessTokens:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessToken'
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
     User:
       type: object
       properties:
@@ -149,6 +148,15 @@ components:
           - superuser
           - admin
           - user
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code associated with this error.
+        error:
+          type: string
+          description: The error message.
     AccessToken:
       type: object
       properties:
@@ -171,20 +179,3 @@ components:
       items:
         type: string
         format: uuid
-    Users:
-      type: array
-      items:
-        $ref: '#/components/schemas/User'
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: The HTTP status code associated with this error.
-        error:
-          type: string
-          description: The error message.
-    AccessTokens:
-      type: array
-      items:
-        $ref: '#/components/schemas/AccessToken'

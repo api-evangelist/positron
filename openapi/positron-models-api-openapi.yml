@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Positron Models API
   version: '1.0'
-  description: 'Operations tagged models across 2 of this provider''s published API definitions: positron-admin-openapi.yml, positron-inference-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged models across 2 of this provider''s published API definitions: positron-admin-openapi.yml, positron-inference-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: '{host}/api/v1'
   variables:
@@ -12,16 +12,14 @@ servers:
 
         '
 tags:
-- name: models
+- name: Models
 paths:
   /models:
     get:
-      summary: Gets a list of all models.
-      description: 'Lists the currently available models, providing basic information about each model.
-
-        '
+      summary: Gets a list of all models
+      description: Lists the currently available models, providing basic information about each model.
       tags:
-      - models
+      - Models
       operationId: listModels
       responses:
         '200':
@@ -35,14 +33,12 @@ paths:
         - API key
   /models/{model}:
     get:
-      summary: Gets a specific model by model id.
+      summary: Gets a specific model by model id
       description: 'Retrieves a model instance, providing basic information about the model such as
 
-        the creation time.
-
-        '
+        the creation time.'
       tags:
-      - models
+      - Models
       operationId: getModel
       parameters:
       - name: model
@@ -68,10 +64,10 @@ paths:
       - bearer:
         - API key
     patch:
-      summary: Updates a specific model by model id.
+      summary: Updates a specific model by model id
       description: Alters information about the model
       tags:
-      - models
+      - Models
       operationId: updateModel
       parameters:
       - name: model
@@ -109,10 +105,10 @@ paths:
       - bearer:
         - API key
     delete:
-      summary: Deletes a specific model by model id.
+      summary: Deletes a specific model by model id
       description: Removes a model from the list of available models
       tags:
-      - models
+      - Models
       operationId: deleteModel
       parameters:
       - name: model
@@ -136,11 +132,9 @@ paths:
   /models/new:
     post:
       summary: Populate information about a model
-      description: 'Creates a model entry
-
-        '
+      description: Creates a model entry
       tags:
-      - models
+      - Models
       operationId: createModel
       requestBody:
         required: true
@@ -166,18 +160,16 @@ paths:
         - API key
   /serviceNodes/{node}:
     delete:
-      summary: Deletes a service node by node id.
+      summary: Deletes a service node by node id
       description: 'Removes a service node from the list of available service nodes.
 
         If the service node is currently servicing requests, those requests
 
         will be drained before halting service, unless `halt=true` is provided
 
-        in the query.
-
-        '
+        in the query.'
       tags:
-      - models
+      - Models
       operationId: deleteServiceNode
       parameters:
       - name: node
@@ -208,11 +200,9 @@ paths:
   /serviceNodes/new:
     post:
       summary: Populate information about a service node
-      description: 'Creates a service node entry
-
-        '
+      description: Creates a service node entry
       tags:
-      - models
+      - Models
       operationId: createServiceNode
       requestBody:
         required: true
@@ -238,27 +228,6 @@ paths:
         - API key
 components:
   schemas:
-    Model:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The model identifier, which can be referenced in the API endpoints.
-        created:
-          type: integer
-          description: The Unix timestamp (in seconds) when the model was created.
-        owned_by:
-          type: string
-          description: The organization that owns the model
-    Models:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model'
-    IdList:
-      type: array
-      items:
-        type: string
-        format: uuid
     ServiceNode:
       type: object
       properties:
@@ -279,6 +248,10 @@ components:
           oneOf:
           - $ref: '#/components/schemas/Models'
           - $ref: '#/components/schemas/IdList'
+    Models:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model'
     Error:
       type: object
       properties:
@@ -288,6 +261,64 @@ components:
         error:
           type: string
           description: The error message.
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the model was created.
+        owned_by:
+          type: string
+          description: The organization that owns the model
+    IdList:
+      type: array
+      items:
+        type: string
+        format: uuid
+    Model_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        object:
+          type: string
+          description: The object type, which is always "model".
+          const: model
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the model was created.
+        owned_by:
+          type: string
+          description: The organization that owns the model
+    Error_2:
+      type: object
+      properties:
+        object:
+          const: error
+        type:
+          enum:
+          - client
+          - internal error
+        message:
+          type: string
+          description: The error message.
+      required:
+      - object
+      - type
+      - message
+    Models_2:
+      type: object
+      properties:
+        object:
+          const: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model_2'
   securitySchemes:
     apiKey:
       type: apiKey
@@ -295,4 +326,4 @@ components:
       in: header
 x-refined-from:
 - positron-admin-openapi.yml
-- positron-inference-openapi.yml
+- positron-inference-openapi.json

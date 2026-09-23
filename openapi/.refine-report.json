@@ -1,31 +1,39 @@
 {
   "provider": "positron",
   "sources": [
-    "positron-access-tokens-api-openapi.yml",
-    "positron-completion-api-openapi.yml",
-    "positron-models-api-openapi.yml",
-    "positron-service-nodes-api-openapi.yml",
-    "positron-users-api-openapi.yml"
+    "_original/positron-admin-openapi.yml",
+    "_original/positron-inference-openapi.json"
   ],
   "outputs": [
     "positron-access-tokens-api-openapi.yml",
-    "positron-completion-api-openapi.yml",
     "positron-models-api-openapi.yml",
     "positron-service-nodes-api-openapi.yml",
-    "positron-users-api-openapi.yml"
+    "positron-users-api-openapi.yml",
+    "positron-completion-api-openapi.yml"
   ],
   "archived": [],
   "errors": [
-    "positron-access-tokens-api-openapi.yml: dangling $ref: #/components/schemas/CreateAccessToken"
+    "positron-admin-openapi.yml: dangling $ref: #/components/schemas/CreateAccessToken"
   ],
   "warnings": [],
   "notes": [
-    "positron-access-tokens-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "positron-completion-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "positron-models-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "positron-service-nodes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "positron-users-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "positron-admin-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "positron-admin-openapi.yml: declared missing tag: access_tokens",
+    "positron-admin-openapi.yml: declared missing tag: models",
+    "positron-admin-openapi.yml: declared missing tag: service_nodes",
+    "positron-admin-openapi.yml: declared missing tag: users",
+    "positron-inference-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'models' spans 2 source specs (positron-admin-openapi.yml, positron-inference-openapi.json): per-path servers applied",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "_original/positron-inference-openapi.yml: archived document superseded by a larger archived document",
+    "positron-access-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "positron-completion-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "positron-models-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "positron-service-nodes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "positron-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

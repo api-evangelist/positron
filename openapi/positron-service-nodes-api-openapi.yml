@@ -11,11 +11,8 @@ tags:
 paths:
   /serviceNodes:
     get:
-      summary: Gets a list of all service nodes.
-      description: 'Lists the currently available service nodes, providing basic information about each
-        node.
-
-        '
+      summary: Gets a list of all service nodes
+      description: Lists the currently available service nodes, providing basic information about each node.
       tags:
       - service_nodes
       operationId: listServiceNodes
@@ -28,10 +25,8 @@ paths:
                 $ref: '#/components/schemas/ServiceNodes'
   /serviceNodes/{node}:
     get:
-      summary: Gets a specific service node by node id.
-      description: 'Retrieves a service node instance, providing basic information about the node.
-
-        '
+      summary: Gets a specific service node by node id
+      description: Retrieves a service node instance, providing basic information about the node.
       tags:
       - service_nodes
       operationId: getServiceNode
@@ -56,7 +51,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
     patch:
-      summary: Updates a specific service node by service node id.
+      summary: Updates a specific service node by service node id
       description: Alters information about the service node
       tags:
       - service_nodes
@@ -95,27 +90,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Model:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The model identifier, which can be referenced in the API endpoints.
-        created:
-          type: integer
-          description: The Unix timestamp (in seconds) when the model was created.
-        owned_by:
-          type: string
-          description: The organization that owns the model
-    Models:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model'
-    IdList:
-      type: array
-      items:
-        type: string
-        format: uuid
     ServiceNodes:
       type: array
       items:
@@ -140,6 +114,10 @@ components:
           oneOf:
           - $ref: '#/components/schemas/Models'
           - $ref: '#/components/schemas/IdList'
+    Models:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model'
     Error:
       type: object
       properties:
@@ -149,3 +127,20 @@ components:
         error:
           type: string
           description: The error message.
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the model was created.
+        owned_by:
+          type: string
+          description: The organization that owns the model
+    IdList:
+      type: array
+      items:
+        type: string
+        format: uuid
