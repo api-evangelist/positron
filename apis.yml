@@ -13,16 +13,19 @@ description: >-
   the Qatar Investment Authority, Arm, Helena, DFJ Growth, Atreides, Valor, Resilience Reserve, Flume Ventures and
   1517 Fund.
 deliveryModel:
-  model: unknown
+  model: library
+  license_evidence:
+    not_product:
+    - positron-ai/admin-api-docs
   open_source: unknown
   commercial: false
-  callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  callable_host: false
+  label: Library · distributed through package registries, no callable service
   confidence: low
   source:
   - openapi
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: unknown
@@ -46,15 +49,15 @@ created: '2026-08-02'
 modified: '2026-08-02'
 tags:
 - Artificial Intelligence
-- AI Inference
+- Inference
 - inference-hardware
 - AI Accelerators
 - LLM
 - Transformers
 - OpenAI-Compatible
-- Machine-Learning
+- Machine Learning
 - Semiconductors
-- Data-Center
+- Data Center
 - llm-serving
 - Model Hosting
 tags_raw:
@@ -70,6 +73,9 @@ tags_raw:
 - data-center
 - llm-serving
 - model-hosting
+- Machine-Learning
+- Data-Center
+- AI Inference
 apis:
 - aid: positron:positron-access-tokens-api
   name: Positron Access Tokens API

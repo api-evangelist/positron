@@ -121,14 +121,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    AccessTokens:
-      type: array
-      items:
-        $ref: '#/components/schemas/AccessToken'
-    Users:
-      type: array
-      items:
-        $ref: '#/components/schemas/User'
     User:
       type: object
       properties:
@@ -157,6 +149,19 @@ components:
         error:
           type: string
           description: The error message.
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+    IdList:
+      type: array
+      items:
+        type: string
+        format: uuid
+    AccessTokens:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessToken'
     AccessToken:
       type: object
       properties:
@@ -174,8 +179,3 @@ components:
           oneOf:
           - $ref: '#/components/schemas/Users'
           - $ref: '#/components/schemas/IdList'
-    IdList:
-      type: array
-      items:
-        type: string
-        format: uuid

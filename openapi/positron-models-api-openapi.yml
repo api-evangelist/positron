@@ -228,6 +228,10 @@ paths:
         - API key
 components:
   schemas:
+    Models:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model'
     ServiceNode:
       type: object
       properties:
@@ -248,10 +252,6 @@ components:
           oneOf:
           - $ref: '#/components/schemas/Models'
           - $ref: '#/components/schemas/IdList'
-    Models:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model'
     Error:
       type: object
       properties:
@@ -261,6 +261,11 @@ components:
         error:
           type: string
           description: The error message.
+    IdList:
+      type: array
+      items:
+        type: string
+        format: uuid
     Model:
       type: object
       properties:
@@ -273,11 +278,6 @@ components:
         owned_by:
           type: string
           description: The organization that owns the model
-    IdList:
-      type: array
-      items:
-        type: string
-        format: uuid
     Model_2:
       type: object
       properties:
