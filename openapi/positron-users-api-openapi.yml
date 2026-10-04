@@ -142,6 +142,10 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
     Error:
       type: object
       properties:
@@ -170,7 +174,3 @@ components:
           - superuser
           - admin
           - user
-    Users:
-      type: array
-      items:
-        $ref: '#/components/schemas/User'

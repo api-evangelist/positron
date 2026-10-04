@@ -104,6 +104,250 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        object:
+          const: error
+        type:
+          enum:
+          - client
+          - internal error
+        message:
+          type: string
+          description: The error message.
+      required:
+      - object
+      - type
+      - message
+    Completion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the completion
+        object:
+          const: text_completion
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the completion was created.
+        model:
+          type: string
+          description: The model used for the completion.
+        choices:
+          type: array
+          description: 'A list of completion choices. Typically length 1, but can be more than
+
+            one if `n` in the CompletionRequest is greater than 1.
+
+            '
+          items:
+            $ref: '#/components/schemas/CompletionChoice'
+        usage:
+          $ref: '#/components/schemas/CompletionUsage'
+    ChatCompletionDelta:
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/ChatRole'
+        content:
+          type: string
+          description: The content of the chunk message
+        function_call: null
+    ChatCompletion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the chat completion
+        object:
+          description: The object type, which is always "chat.completion".
+          const: chat.completion
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the completion was created.
+        model:
+          type: string
+          description: The model used for the chat completion.
+        choices:
+          type: array
+          description: 'A list of chat completion choices. Typically length 1, but can be more than
+
+            one if `n` in the ChatCompletionRequest is greater than 1.
+
+            '
+          items:
+            $ref: '#/components/schemas/ChatCompletionChoice'
+        usage:
+          $ref: '#/components/schemas/CompletionUsage'
+    CompletionUsage:
+      type: object
+      properties:
+        prompt_tokens: integer
+        completion_tokens: integer
+        total_tokens: integer
+    ChatFinishReason:
+      description: 'The reason the model stopped generating tokens. This will be `stop` if the
+
+        model hit a natural stop point or a provided stop sequence, `length` if the
+
+        maximum number of tokens specified in the request was reached, or
+
+        `function_call` if the model called a function.
+
+        '
+      enum:
+      - stop
+      - length
+      - function_call
+    ChatFunctionCall:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the function to call
+        arguments:
+          $ref: '#/components/schemas/ChatFunctionArguments'
+    ChatCompletionChunk:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the chat completion chunk
+        object:
+          type: string
+          description: The object type, which is always "chat.completion.chunk".
+          const: chat.completion.chunk
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the chunk was created.
+        model:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        choices:
+          type: array
+          description: 'A list of chat completion choices. Typically length 1, but can be more than
+
+            one if `n` in the ChatCompletionRequest is greater than 1.
+
+            '
+          items:
+            $ref: '#/components/schemas/ChatCompletionChoice'
+    ChatCompletionRequest:
+      type: object
+      required:
+      - model
+      - messages
+      properties:
+        model:
+          type: string
+          description: ID of the model to use.  Use the /models endpoint to list available models.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        functions:
+          type: array
+          description: 'NB: this feature is not currently supported'
+          items:
+            $ref: '#/components/schemas/ChatFunction'
+        function_call:
+          description: 'Controls how the model responds to function calls.
+
+            `none` means the model does not call a function, and responds to the end-user.
+
+            `auto` means the model can pick between an end-user or calling a function.
+
+            Specifying a particular function via `{"name": "my_function"}` forces the model
+
+            to call that function. none is the default when no functions are present. `auto`
+
+            is the default if functions are present.
+
+
+            NB: this feature is not currently supported
+
+            '
+          oneOf:
+          - enum:
+            - none
+            - auto
+          - type: object
+            required:
+            - name
+            parameters:
+              name:
+                type: string
+    ChatMessage:
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/ChatRole'
+        content:
+          type: string
+          description: The content of the message
+        function_call:
+          $ref: '#/components/schemas/ChatFunctionCall'
+    ChatFunctionArguments:
+      type: string
+      description: 'The arguments to call the function with, as generated by the model
+
+        in JSON format. Note that the model does not always generate valid
+
+        JSON, and may hallucinate parameters not defined by your function
+
+        schema. Validate the arguments in your code before calling your function.
+
+        '
+      contentMediaType: application/json
+    ChatCompletionChoice:
+      type: object
+      properties:
+        index:
+          type: integer
+          description: The index of the choice in the list of choices.
+        delta:
+          $ref: '#/components/schemas/ChatCompletionDelta'
+        finish_reason:
+          $ref: '#/components/schemas/ChatFinishReason'
+    ChatRole:
+      description: The role of the author of the message.
+      enum:
+      - system
+      - user
+      - assistant
+      - function
+    ChatFunction:
+      type: object
+      required:
+      - name
+      - parameters
+      properties:
+        name:
+          type: string
+          maxLength: 64
+          pattern: ^[a-zA-Z0-9_-]+$
+          description: 'The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores
+
+            and dashes, with a maximum length of 64.
+
+            '
+        description:
+          type: string
+          description: 'A description of what the function does, used by the model to choose when
+
+            and how to call the function
+
+            '
+        parameters:
+          type: object
+          description: 'The parameters the functions accepts, described as a JSON Schema object.
+
+            To describe a function that accepts no parameters, provide the value
+
+            `{"type": "object", "properties": {}}`.
+
+            '
     SelectionSettings:
       type: object
       properties:
@@ -272,47 +516,6 @@ components:
             NB: not all backends support this option.
 
             '
-    ChatCompletionChoice:
-      type: object
-      properties:
-        index:
-          type: integer
-          description: The index of the choice in the list of choices.
-        delta:
-          $ref: '#/components/schemas/ChatCompletionDelta'
-        finish_reason:
-          $ref: '#/components/schemas/ChatFinishReason'
-    CompletionUsage:
-      type: object
-      properties:
-        prompt_tokens: integer
-        completion_tokens: integer
-        total_tokens: integer
-    ChatCompletionChunk:
-      type: object
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the chat completion chunk
-        object:
-          type: string
-          description: The object type, which is always "chat.completion.chunk".
-          const: chat.completion.chunk
-        created:
-          type: integer
-          description: The Unix timestamp (in seconds) when the chunk was created.
-        model:
-          type: string
-          description: The model identifier, which can be referenced in the API endpoints.
-        choices:
-          type: array
-          description: 'A list of chat completion choices. Typically length 1, but can be more than
-
-            one if `n` in the ChatCompletionRequest is greater than 1.
-
-            '
-          items:
-            $ref: '#/components/schemas/ChatCompletionChoice'
     CompletionRequest:
       type: object
       required:
@@ -387,85 +590,11 @@ components:
             NB: this feature is not currently supported.
 
             '
-    ChatFunctionCall:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the function to call
-        arguments:
-          $ref: '#/components/schemas/ChatFunctionArguments'
-    ChatFunctionArguments:
-      type: string
-      description: 'The arguments to call the function with, as generated by the model
-
-        in JSON format. Note that the model does not always generate valid
-
-        JSON, and may hallucinate parameters not defined by your function
-
-        schema. Validate the arguments in your code before calling your function.
-
-        '
-      contentMediaType: application/json
     ChatCompletionChunkText:
       type: string
       contentMediaType: application/json
       contentSchema:
         $ref: '#/components/schemas/ChatCompletionChunk'
-    ChatCompletionRequest:
-      type: object
-      required:
-      - model
-      - messages
-      properties:
-        model:
-          type: string
-          description: ID of the model to use.  Use the /models endpoint to list available models.
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessage'
-        functions:
-          type: array
-          description: 'NB: this feature is not currently supported'
-          items:
-            $ref: '#/components/schemas/ChatFunction'
-        function_call:
-          description: 'Controls how the model responds to function calls.
-
-            `none` means the model does not call a function, and responds to the end-user.
-
-            `auto` means the model can pick between an end-user or calling a function.
-
-            Specifying a particular function via `{"name": "my_function"}` forces the model
-
-            to call that function. none is the default when no functions are present. `auto`
-
-            is the default if functions are present.
-
-
-            NB: this feature is not currently supported
-
-            '
-          oneOf:
-          - enum:
-            - none
-            - auto
-          - type: object
-            required:
-            - name
-            parameters:
-              name:
-                type: string
-    ChatCompletionDelta:
-      type: object
-      properties:
-        role:
-          $ref: '#/components/schemas/ChatRole'
-        content:
-          type: string
-          description: The content of the chunk message
-        function_call: null
     CompletionChoice:
       type: object
       properties:
@@ -492,135 +621,6 @@ components:
           - length
           - content_filter
           description: The reason the model stopped generating tokens. This will be `stop` if the model hit a natural stop point or a provided stop sequence, `length` if the maximum number of tokens specified in the request was reached, or `content_filter` if the model detected that the content is sensitive and should not be returned.
-    Error:
-      type: object
-      properties:
-        object:
-          const: error
-        type:
-          enum:
-          - client
-          - internal error
-        message:
-          type: string
-          description: The error message.
-      required:
-      - object
-      - type
-      - message
-    ChatFinishReason:
-      description: 'The reason the model stopped generating tokens. This will be `stop` if the
-
-        model hit a natural stop point or a provided stop sequence, `length` if the
-
-        maximum number of tokens specified in the request was reached, or
-
-        `function_call` if the model called a function.
-
-        '
-      enum:
-      - stop
-      - length
-      - function_call
-    Completion:
-      type: object
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the completion
-        object:
-          const: text_completion
-        created:
-          type: integer
-          description: The Unix timestamp (in seconds) when the completion was created.
-        model:
-          type: string
-          description: The model used for the completion.
-        choices:
-          type: array
-          description: 'A list of completion choices. Typically length 1, but can be more than
-
-            one if `n` in the CompletionRequest is greater than 1.
-
-            '
-          items:
-            $ref: '#/components/schemas/CompletionChoice'
-        usage:
-          $ref: '#/components/schemas/CompletionUsage'
-    ChatFunction:
-      type: object
-      required:
-      - name
-      - parameters
-      properties:
-        name:
-          type: string
-          maxLength: 64
-          pattern: ^[a-zA-Z0-9_-]+$
-          description: 'The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores
-
-            and dashes, with a maximum length of 64.
-
-            '
-        description:
-          type: string
-          description: 'A description of what the function does, used by the model to choose when
-
-            and how to call the function
-
-            '
-        parameters:
-          type: object
-          description: 'The parameters the functions accepts, described as a JSON Schema object.
-
-            To describe a function that accepts no parameters, provide the value
-
-            `{"type": "object", "properties": {}}`.
-
-            '
-    ChatCompletion:
-      type: object
-      properties:
-        id:
-          type: string
-          description: A unique identifier for the chat completion
-        object:
-          description: The object type, which is always "chat.completion".
-          const: chat.completion
-        created:
-          type: integer
-          description: The Unix timestamp (in seconds) when the completion was created.
-        model:
-          type: string
-          description: The model used for the chat completion.
-        choices:
-          type: array
-          description: 'A list of chat completion choices. Typically length 1, but can be more than
-
-            one if `n` in the ChatCompletionRequest is greater than 1.
-
-            '
-          items:
-            $ref: '#/components/schemas/ChatCompletionChoice'
-        usage:
-          $ref: '#/components/schemas/CompletionUsage'
-    ChatMessage:
-      type: object
-      properties:
-        role:
-          $ref: '#/components/schemas/ChatRole'
-        content:
-          type: string
-          description: The content of the message
-        function_call:
-          $ref: '#/components/schemas/ChatFunctionCall'
-    ChatRole:
-      description: The role of the author of the message.
-      enum:
-      - system
-      - user
-      - assistant
-      - function
   securitySchemes:
     apiKey:
       type: apiKey

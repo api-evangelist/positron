@@ -233,10 +233,6 @@ components:
       items:
         type: string
         format: uuid
-    Models:
-      type: array
-      items:
-        $ref: '#/components/schemas/Model'
     Model:
       type: object
       properties:
@@ -249,15 +245,6 @@ components:
         owned_by:
           type: string
           description: The organization that owns the model
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: The HTTP status code associated with this error.
-        error:
-          type: string
-          description: The error message.
     ServiceNode:
       type: object
       properties:
@@ -278,6 +265,35 @@ components:
           oneOf:
           - $ref: '#/components/schemas/Models'
           - $ref: '#/components/schemas/IdList'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code associated with this error.
+        error:
+          type: string
+          description: The error message.
+    Models:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model'
+    Model_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        object:
+          type: string
+          description: The object type, which is always "model".
+          const: model
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the model was created.
+        owned_by:
+          type: string
+          description: The organization that owns the model
     Error_2:
       type: object
       properties:
@@ -303,22 +319,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Model_2'
-    Model_2:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The model identifier, which can be referenced in the API endpoints.
-        object:
-          type: string
-          description: The object type, which is always "model".
-          const: model
-        created:
-          type: integer
-          description: The Unix timestamp (in seconds) when the model was created.
-        owned_by:
-          type: string
-          description: The organization that owns the model
   securitySchemes:
     apiKey:
       type: apiKey

@@ -121,6 +121,28 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    IdList:
+      type: array
+      items:
+        type: string
+        format: uuid
+    AccessToken:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        redacted:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        users:
+          oneOf:
+          - $ref: '#/components/schemas/Users'
+          - $ref: '#/components/schemas/IdList'
     User:
       type: object
       properties:
@@ -140,11 +162,10 @@ components:
           - superuser
           - admin
           - user
-    IdList:
+    Users:
       type: array
       items:
-        type: string
-        format: uuid
+        $ref: '#/components/schemas/User'
     Error:
       type: object
       properties:
@@ -154,27 +175,6 @@ components:
         error:
           type: string
           description: The error message.
-    AccessToken:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        redacted:
-          type: string
-        expires_at:
-          type: string
-          format: date-time
-        users:
-          oneOf:
-          - $ref: '#/components/schemas/Users'
-          - $ref: '#/components/schemas/IdList'
-    Users:
-      type: array
-      items:
-        $ref: '#/components/schemas/User'
     AccessTokens:
       type: array
       items:
