@@ -217,8 +217,6 @@ apis:
   - type: SourceCode
     url: https://github.com/positron-ai/admin-api-docs
 common:
-- type: Plans
-  url: plans/positron-plans-pricing.yml
 - type: IssueTracker
   url: https://github.com/positron-ai/admin-api-docs/issues
 - type: X-MCPServerCandidate
