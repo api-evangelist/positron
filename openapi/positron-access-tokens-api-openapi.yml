@@ -121,11 +121,19 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    IdList:
+    AccessTokens:
       type: array
       items:
-        type: string
-        format: uuid
+        $ref: '#/components/schemas/AccessToken'
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          description: The HTTP status code associated with this error.
+        error:
+          type: string
+          description: The error message.
     AccessToken:
       type: object
       properties:
@@ -162,20 +170,12 @@ components:
           - superuser
           - admin
           - user
+    IdList:
+      type: array
+      items:
+        type: string
+        format: uuid
     Users:
       type: array
       items:
         $ref: '#/components/schemas/User'
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: The HTTP status code associated with this error.
-        error:
-          type: string
-          description: The error message.
-    AccessTokens:
-      type: array
-      items:
-        $ref: '#/components/schemas/AccessToken'

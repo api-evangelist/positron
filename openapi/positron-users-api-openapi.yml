@@ -142,10 +142,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Users:
-      type: array
-      items:
-        $ref: '#/components/schemas/User'
     Error:
       type: object
       properties:
@@ -155,6 +151,10 @@ components:
         error:
           type: string
           description: The error message.
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
     User:
       type: object
       properties:

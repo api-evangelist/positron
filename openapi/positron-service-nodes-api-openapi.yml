@@ -90,23 +90,19 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    IdList:
-      type: array
-      items:
-        type: string
-        format: uuid
-    Model:
+    Error:
       type: object
       properties:
-        id:
-          type: string
-          description: The model identifier, which can be referenced in the API endpoints.
-        created:
+        status:
           type: integer
-          description: The Unix timestamp (in seconds) when the model was created.
-        owned_by:
+          description: The HTTP status code associated with this error.
+        error:
           type: string
-          description: The organization that owns the model
+          description: The error message.
+    Models:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model'
     ServiceNode:
       type: object
       properties:
@@ -131,16 +127,20 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ServiceNode'
-    Error:
-      type: object
-      properties:
-        status:
-          type: integer
-          description: The HTTP status code associated with this error.
-        error:
-          type: string
-          description: The error message.
-    Models:
+    IdList:
       type: array
       items:
-        $ref: '#/components/schemas/Model'
+        type: string
+        format: uuid
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The model identifier, which can be referenced in the API endpoints.
+        created:
+          type: integer
+          description: The Unix timestamp (in seconds) when the model was created.
+        owned_by:
+          type: string
+          description: The organization that owns the model
