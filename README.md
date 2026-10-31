@@ -64,39 +64,125 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Positron AI builds purpose-built Transformer inference hardware — the Atlas appliance (8x in-house
-Archer accelerators, 256 GB HBM, dual AMD EPYC Genoa), with Asimov silicon and the Titan system
-slated for 2027. Founded 2023, headquartered in Reno, Nevada; $230M Series B (February 2026) at a
-valuation above $1B.
+Positron AI is a US-based generative-AI hardware company founded in 2023 and headquartered in Reno, Nevada, building purpose-built Transformer inference accelerators as an alternative to GPU-based inference infrastructure. Its shipping product, Atlas, is a rack inference appliance built on eight in-house Archer accelerators (256 GB HBM) and dual AMD EPYC Genoa processors, with the next-generation Asimov silicon and Titan system slated for 2027. Positron exposes its inference fleet through "Olivaw", a serving and administration layer that publishes two documented HTTP APIs: an OpenAI-compatible completions API (models, chat completions, text completions, with server-sent-event streaming) so existing OpenAI client code can be repointed at a Positron endpoint, and an administrative API for managing models, service nodes, users, and access tokens on an appliance or hosted cluster. The company raised a $230M Series B in February 2026 at a valuation above $1B from ARENA, Jump Trading, Unless, the Qatar Investment Authority, Arm, Helena, DFJ Growth, Atreides, Valor, Resilience Reserve, Flume Ventures and 1517 Fund.
 
-Positron exposes its inference fleet through **Olivaw**, a serving and administration layer that
-publishes two documented HTTP APIs:
+**Areas:** Artificial Intelligence · Inference · inference-hardware · AI Accelerators · LLM · Transformers · OpenAI-Compatible · Machine Learning · Semiconductors · Data Center · llm-serving · Model Hosting
 
-- **Olivaw OpenAI-Compatible Inference API** — `/models`, `/models/{model}`, `/chat/completions`,
-  `/completions`, with server-sent-event streaming. Because it mirrors the OpenAI surface, an
-  OpenAI client library works by repointing `base_url`. Documented at
-  <https://support.positron.ai/api-documentation>.
-- **Olivaw Admin API** — the control plane over the model catalogue, service nodes (Giskard, vLLM
-  or OpenAI backends), platform users and access tokens. Published as OpenAPI 3.1.0 in
-  <https://github.com/positron-ai/admin-api-docs>.
+## Positron on APIs.io
 
-## Links
+Everything profiled for Positron is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/positron/](https://apis.io/providers/positron/)** — or go straight to one of the APIs or properties below.
 
-- Website — <https://www.positron.ai/>
-- Developer portal — <https://support.positron.ai/>
-- User guide — <https://support.positron.ai/user-guide>
-- Release notes — <https://support.positron.ai/release-notes>
-- GitHub — <https://github.com/positron-ai>
-- Secondary-market listing — <https://forgeglobal.com/positron_stock/>
+### APIs (5)
 
-## What is in this repository
+- [Positron Access Tokens API](https://apis.io/apis/positron/positron-access-tokens-api/) — The access_tokens API from Positron — 3 operation(s) for access_tokens.
+- [Positron Completion API](https://apis.io/apis/positron/positron-completion-api/) — The completion API from Positron — 2 operation(s) for completion.
+- [Positron Models API](https://apis.io/apis/positron/positron-models-api/) — The models API from Positron — 5 operation(s) for models.
+- [Positron Service Nodes API](https://apis.io/apis/positron/positron-service-nodes-api/) — The service_nodes API from Positron — 2 operation(s) for service_nodes.
+- [Positron Users API](https://apis.io/apis/positron/positron-users-api/) — The users API from Positron — 3 operation(s) for users.
 
-`apis.yml` is the APIs.json index. Artifacts: `openapi/` (both harvested specs, plus `_original/`),
-`overlays/`, `authentication/`, `conventions/`, `errors/`, `data-model/`, `lifecycle/`,
-`changelog/`, `conformance/`, `packages/`, `well-known/`, `security/`, `agentic-access/`,
-`skills/`, `mcp/`, `llms/`.
+### Published properties
 
-Recorded absences (probed 2026-08-02, not gaps in the research): no first-party SDK or CLI, no MCP
-server, no A2A agent card, no webhooks/AsyncAPI, no `/.well-known/` documents, no `security.txt`,
-no status page, no trust center, no public pricing, terms or privacy pages, and no OAuth/OIDC —
-authentication is static API keys only.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [positron-mcp.yml](https://apis.io/servers/positron/positron-mcp-yml/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Positron Agentic Access](https://apis.io/agentic-access/positron/positron-agentic-access/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [Olivaw Admin Access Tokens API](https://apis.io/collections/positron/open-positron-access-tokens-api/)
+- [Olivaw Admin API](https://apis.io/collections/positron/open-positron-admin/)
+- [Olivaw OpenAI Completion API](https://apis.io/collections/positron/open-positron-completion-api/)
+- [Olivaw OpenAI API](https://apis.io/collections/positron/open-positron-inference/)
+- [Positron Models API](https://apis.io/collections/positron/open-positron-models-api/)
+- [Olivaw Admin Service Nodes API](https://apis.io/collections/positron/open-positron-service-nodes-api/)
+- [Olivaw Admin Users API](https://apis.io/collections/positron/open-positron-users-api/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Positron Admin Overlay](https://apis.io/overlays/positron/positron-admin-overlay/)
+- [Positron Inference Overlay](https://apis.io/overlays/positron/positron-inference-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Positron Authentication](https://apis.io/security/positron/positron-authentication/)
+- [Positron Domain Security](https://apis.io/security/positron/positron-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.positron.ai/)
+- [Documentation](https://support.positron.ai/api-documentation)
+- [Getting started](https://support.positron.ai/user-guide)
+- [API reference](https://support.positron.ai/api-documentation)
+- [Support](https://www.positron.ai/contact-sales)
+- [Changelog](https://support.positron.ai/release-notes)
+- [GitHub](https://github.com/positron-ai)
+
+## API Evangelist rating
+
+**Kin Score 32.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 79.5 |
+| Contract quality | 44.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 56.5 |
+| Access clarity | 0.0 |
+
+**Agent readiness 23.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/positron/](https://apis.io/providers/positron/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Positron: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/positron/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
